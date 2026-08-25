@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useLocation } from '../../context/LocationContext';
 import styles from './VenuesByCity.module.css';
@@ -14,7 +14,7 @@ interface CityCardItem {
 const DEFAULT_FALLBACK = 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800&auto=format&fit=crop&q=80';
 
 const CITY_PAGES: CityCardItem[][] = [
-  // Page 1 (The 10 cities matching the reference image)
+  // Page 1 (The 10 primary cities)
   [
     {
       name: 'Bangalore',
@@ -67,7 +67,7 @@ const CITY_PAGES: CityCardItem[][] = [
       image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&auto=format&fit=crop&q=80', // Grand Temple & Palace
     },
   ],
-  // Page 2 (Additional top wedding destinations)
+  // Page 2 (Additional top destinations)
   [
     {
       name: 'Jaipur',
@@ -124,15 +124,27 @@ const CITY_PAGES: CityCardItem[][] = [
 
 export const VenuesByCity = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const { setSelectedLocation } = useLocation();
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setCurrentPage((prev) => (prev + 1) % CITY_PAGES.length);
-  };
+  }, []);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setCurrentPage((prev) => (prev === 0 ? CITY_PAGES.length - 1 : prev - 1));
-  };
+  }, []);
+
+  // Automatic scrolling / page rotation every 4.5 seconds (pauses on hover)
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [isPaused, handleNext]);
 
   const handleCityClick = (cityName: string) => {
     setSelectedLocation(cityName);
@@ -141,17 +153,22 @@ export const VenuesByCity = () => {
   const currentCities = CITY_PAGES[currentPage];
 
   return (
-    <section className={styles.citySection} aria-label="Venues by City">
+    <section className={styles.citySection} aria-label="Explore Wedding Venues by City">
       <div className={styles.container}>
-        {/* Header with Title and Navigation Arrow Buttons */}
+        {/* Header with Title, Grammatically Correct Subtitle, and Navigation Arrow Buttons */}
         <div className={styles.header}>
-          <h2 className={styles.title}>Venues by City</h2>
+          <div>
+            <span className={styles.sectionBadge}>POPULAR DESTINATIONS</span>
+            <h2 className={styles.title}>Wedding Venues by City</h2>
+            <p className={styles.subtitle}>Explore curated sacred spaces and celebration halls across top Indian cities</p>
+          </div>
+          
           <div className={styles.navButtons}>
             <button
               type="button"
               className={styles.navBtn}
               onClick={handlePrev}
-              aria-label="Previous cities"
+              aria-label="View previous cities"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6" />
@@ -161,7 +178,7 @@ export const VenuesByCity = () => {
               type="button"
               className={styles.navBtn}
               onClick={handleNext}
-              aria-label="Next cities"
+              aria-label="View next cities"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6" />
@@ -170,9 +187,13 @@ export const VenuesByCity = () => {
           </div>
         </div>
 
-        {/* 10-Card Landmark Grid (2 Rows of 5) */}
-        <div className={styles.sliderWrapper}>
-          <div className={styles.grid}>
+        {/* 10-Card Landmark Grid (2 Rows of 5) with Automatic Scrolling and Pause on Hover */}
+        <div
+          className={styles.sliderWrapper}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div key={currentPage} className={styles.grid}>
             {currentCities.map((city) => (
               <Link
                 key={city.name}
@@ -207,7 +228,7 @@ export const VenuesByCity = () => {
               type="button"
               className={`${styles.dot} ${currentPage === index ? styles.activeDot : ''}`}
               onClick={() => setCurrentPage(index)}
-              aria-label={`Go to page ${index + 1}`}
+              aria-label={`Go to city page ${index + 1}`}
             />
           ))}
         </div>

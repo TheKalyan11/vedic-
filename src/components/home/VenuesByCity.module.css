@@ -12,8 +12,18 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 1.75rem;
+}
+
+.sectionBadge {
+  color: var(--color-primary, #D35400);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
 .title {
@@ -21,8 +31,17 @@
   font-size: 2.1rem;
   font-weight: 700;
   color: #111827;
-  margin: 0;
+  margin: 0 0 0.35rem 0;
   letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-outfit);
+  font-size: 0.95rem;
+  color: #6B7280;
+  margin: 0;
+  max-width: 600px;
 }
 
 .navButtons {
@@ -31,8 +50,8 @@
 }
 
 .navBtn {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #E5E7EB;
   border: none;
@@ -45,8 +64,9 @@
 }
 
 .navBtn:hover {
-  background: #D1D5DB;
-  color: #111827;
+  background: var(--color-primary, #D35400);
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
 .navBtn svg {
@@ -54,7 +74,7 @@
   height: 18px;
 }
 
-/* 2 Rows of 5 Cards Grid */
+/* 2 Rows of 5 Cards Grid with Fade-in on Page Change */
 .sliderWrapper {
   overflow: hidden;
   width: 100%;
@@ -65,6 +85,18 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 1.25rem;
   width: 100%;
+  animation: fadeInGrid 0.4s ease-out;
+}
+
+@keyframes fadeInGrid {
+  from {
+    opacity: 0.5;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Landmark City Card */
@@ -180,8 +212,18 @@
     padding: 2rem 0 3rem 0;
   }
 
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
   .title {
     font-size: 1.65rem;
+  }
+
+  .subtitle {
+    font-size: 0.88rem;
   }
 
   .grid {
