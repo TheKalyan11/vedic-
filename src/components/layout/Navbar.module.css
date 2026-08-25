@@ -1,0 +1,891 @@
+.navWrapper {
+  position: relative;
+  z-index: 1000;
+}
+
+/* 1. Top Navigation Bar */
+.topBar {
+  background-color: var(--color-primary); /* Solid Vedic Venues Orange */
+  color: #FFFFFF;
+  font-size: 0.92rem;
+  height: 48px; /* Compact height */
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1002; /* Higher z-index to stay permanently on top */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.topBarContainer {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--spacing-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Left: Tagline + Location Button */
+.topBarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  position: relative;
+}
+
+.tagline {
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .tagline {
+    display: none;
+  }
+}
+
+/* Location Container & Button */
+.locationContainer {
+  position: relative;
+}
+
+.locationButton {
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  color: #2C3E50;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.locationButton:hover,
+.locationButtonActive {
+  background: #FDFDFD;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.selectedCityText {
+  white-space: nowrap;
+}
+
+.dropdownArrow {
+  font-size: 0.6rem;
+  color: #555555;
+  transition: transform 0.3s ease;
+}
+
+.dropdownArrowOpen {
+  transform: rotate(180deg);
+}
+
+/* Location Mega Dropdown Modal */
+.locationMegaDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 860px;
+  max-width: calc(100vw - 40px);
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 20px 24px;
+  z-index: 2000;
+  animation: dropdownFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.locationSearchWrapper {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  color: #8C8C8C;
+  pointer-events: none;
+}
+
+.locationSearchInput {
+  width: 100%;
+  height: 42px;
+  background-color: #FAFAFA;
+  border: 1px solid #E5E5E5;
+  border-radius: 6px;
+  padding: 0 14px 0 40px;
+  font-size: 0.95rem;
+  color: #1A1A1A;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.locationSearchInput:focus {
+  background-color: #FFFFFF;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.12);
+}
+
+.locationGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.locationColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnTitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-primary, #D35400);
+  margin-bottom: 12px;
+  text-transform: none;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.cityList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 0;
+  margin: 0;
+}
+
+.cityItem {
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+  color: #4A4A4A;
+  text-align: left;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  width: 100%;
+}
+
+.cityItem:hover {
+  color: var(--color-primary, #D35400);
+  background-color: rgba(211, 84, 0, 0.08);
+  font-weight: 600;
+  transform: translateX(2px);
+}
+
+.cityItemActive {
+  color: var(--color-primary, #D35400);
+  font-weight: 700;
+  background-color: rgba(211, 84, 0, 0.1);
+}
+
+/* Right Side Actions */
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  margin-left: auto;
+}
+
+.topBarDivider {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.8rem;
+  user-select: none;
+}
+
+.topBarLink {
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-decoration: none;
+  position: relative;
+  padding: 2px 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.actionIcon {
+  width: 15px;
+  height: 15px;
+  color: #FFFFFF;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.actionText {
+  position: relative;
+  letter-spacing: 0.2px;
+}
+
+/* Center-expanding underline animation on hover */
+.actionText::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background-color: #FFFFFF;
+  transform: translateX(-50%);
+  transition: width 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--radius-full);
+}
+
+.topBarLink:hover .actionText::after {
+  width: 100%;
+}
+
+.topBarLink:hover {
+  opacity: 0.95;
+}
+
+.topBarLink:hover .actionIcon {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+}
+
+/* Download App Icon Bounce Animation */
+.appLink:hover .appIcon {
+  animation: appIconBounce 0.7s cubic-bezier(0.28, 0.84, 0.42, 1) infinite alternate;
+}
+
+@keyframes appIconBounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Write a Review subtle icon tilt on hover */
+.reviewLink:hover .actionIcon {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+/* 2. Main Navigation Bar - Always Fixed Below Top Bar */
+.mainNavContainer {
+  position: fixed;
+  top: 48px; /* Positioned permanently below the 48px top bar */
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 0;
+  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Before scrolling (Top of page): Full-Width Solid White Navigation */
+.mainNav {
+  width: 100%;
+  max-width: 100%;
+  background: #FFFFFF; /* Pure Solid White */
+  border-bottom: 1px solid var(--color-border-light, #f0f0f0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  pointer-events: auto;
+  transition: 
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* While Scrolling State: Floating Rounded Liquid-Glass Navbar (No internal compression) */
+.mainNavContainer.scrolled {
+  padding-top: 8px;
+}
+
+.mainNavContainer.scrolled .mainNav {
+  max-width: calc(100% - 48px); /* Floating outer margins */
+  border-radius: var(--radius-full); /* Fully rounded capsule */
+  background: rgba(255, 255, 255, 0.85); /* Transparent Liquid Glass */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.08), 
+    0 2px 8px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+.navInner {
+  width: 100%;
+  padding: 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+  box-sizing: border-box;
+}
+
+/* Far Left Logo */
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brandLogo {
+  height: 54px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
+  transition: transform var(--transition-fast);
+}
+
+.brandLogo:hover {
+  transform: scale(1.03);
+}
+
+/* Center Menu */
+.desktopMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  flex: 1;
+  margin: 0 var(--spacing-xl);
+}
+
+.navLink {
+  color: var(--color-text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  padding: 0.5rem 0.2rem;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-primary);
+  transition: width var(--transition-normal);
+  border-radius: var(--radius-full);
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* Right Side Actions: Pinned to far right */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Search Liquid Glass Button */
+.searchGlassButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.04),
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.searchGlassButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: 0.75s ease;
+  pointer-events: none;
+}
+
+.searchGlassButton:hover::before {
+  left: 100%;
+}
+
+.searchGlassButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 8px 24px rgba(211, 84, 0, 0.15),
+    inset 0 1px 3px rgba(255, 255, 255, 1);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.mobileToggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .locationMegaDropdown {
+    width: 90vw;
+    left: 5vw;
+    position: fixed;
+    top: 48px;
+  }
+  .locationGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .desktopMenu {
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 1024px) {
+  .desktopMenu {
+    display: none;
+  }
+  .mobileToggle {
+    display: block;
+  }
+  
+  .mobileMenu {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all var(--transition-normal);
+  }
+
+  .mainNavContainer.scrolled .mobileMenu {
+    border-radius: var(--radius-lg);
+    margin: 0 var(--spacing-sm);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .mobileMenuOpen {
+    max-height: 600px;
+    opacity: 1;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .mobileNavLinks {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-xl);
+    gap: var(--spacing-md);
+  }
+
+  .mobileNavLinks a {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .mobileNavLinks a:hover {
+    color: var(--color-primary);
+  }
+
+  .mobileDivider {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin: var(--spacing-sm) 0;
+  }
+
+  .mobileActionLink {
+    color: var(--color-primary-dark) !important;
+    font-weight: 600 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .topBarRight {
+    gap: var(--spacing-sm);
+  }
+  .topBarDivider {
+    display: none;
+  }
+  .navInner {
+    padding: 0 var(--spacing-md);
+  }
+  .locationGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   Venues Mega Dropdown
+   ========================================================= */
+.menuItemWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navLinkActive {
+  color: var(--color-primary, #D35400) !important;
+}
+
+/* =========================================================
+   Venues Mega Dropdown
+   ========================================================= */
+.menuItemWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.navLinkActive {
+  color: var(--color-primary, #D35400) !important;
+}
+
+.navLinkActive::after {
+  width: 100% !important;
+}
+
+.venuesMegaDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-35%);
+  width: 860px;
+  max-width: calc(100vw - 32px);
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 18px 22px;
+  z-index: 2000;
+  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Invisible hover bridge to prevent premature closing */
+.venuesMegaDropdown::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.venuesMegaContainer {
+  display: grid;
+  grid-template-columns: 190px 115px 1fr;
+  gap: 22px;
+}
+
+.venueColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.venueColumnTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-primary, #D35400);
+  margin-bottom: 9px;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.venueList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+}
+
+.venueLink {
+  font-size: 0.88rem;
+  color: #4A4A4A;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+  line-height: 1.35;
+}
+
+.venueLink:hover {
+  color: var(--color-primary, #D35400);
+  transform: translateX(2px);
+}
+
+.boldLink {
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-top: 3px;
+  display: inline-block;
+  font-size: 0.88rem;
+}
+
+.boldLink:hover {
+  color: var(--color-primary, #D35400);
+}
+
+/* Destination Wedding Venues Section */
+.destinationSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.destinationTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 9px;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.destinationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 10px;
+}
+
+.destinationCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.destinationCard:hover {
+  transform: translateY(-2px);
+}
+
+.destinationImageWrapper {
+  width: 100%;
+  height: 72px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4px;
+  background-color: #F5F5F5;
+}
+
+.destinationImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.destinationCard:hover .destinationImage {
+  transform: scale(1.06);
+}
+
+.destinationName {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2C3E50;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.destinationTag {
+  font-size: 0.78rem;
+  color: var(--color-primary, #D35400);
+  text-align: center;
+  font-weight: 500;
+  margin-top: 1px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.destinationCard:hover .destinationName {
+  color: var(--color-primary, #D35400);
+}
+
+/* =========================================================
+   Vendors Mega Dropdown
+   ========================================================= */
+.vendorsMegaDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-40%);
+  width: 880px;
+  max-width: calc(100vw - 32px);
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 18px 22px;
+  z-index: 2000;
+  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Invisible hover bridge to prevent premature closing */
+.vendorsMegaDropdown::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.vendorsMegaContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.vendorColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.vendorSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.vendorSectionTitle {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--color-primary, #D35400);
+  margin-bottom: 6px;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.vendorList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  margin: 0;
+}
+
+.vendorLink {
+  font-size: 0.88rem;
+  color: #4A4A4A;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  transition: all 0.2s ease;
+  line-height: 1.35;
+}
+
+.vendorLink:hover {
+  color: var(--color-primary, #D35400);
+  transform: translateX(2px);
+}
+
+.serviceBadge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #27AE60;
+  border: 1px solid #27AE60;
+  border-radius: 3px;
+  padding: 1px 4px;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+

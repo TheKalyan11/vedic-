@@ -1,0 +1,217 @@
+.page {
+  padding-bottom: var(--spacing-3xl);
+  background-color: var(--color-background);
+}
+
+.imageHeader {
+  height: 55vh;
+  min-height: 450px;
+  width: 100%;
+  position: relative;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--color-background) 0%, rgba(250, 250, 250, 0) 40%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  margin-top: -120px;
+  position: relative;
+  z-index: 10;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: var(--spacing-3xl);
+}
+
+.mainContent {
+  background-color: var(--color-surface);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-light);
+}
+
+.header {
+  margin-bottom: var(--spacing-2xl);
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: var(--spacing-xl);
+}
+
+.badgeWrapper {
+  margin-bottom: var(--spacing-md);
+}
+
+.badge {
+  display: inline-block;
+  background-color: rgba(211, 84, 0, 0.1);
+  color: var(--color-primary-dark);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
+  line-height: 1.1;
+}
+
+.location {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+.amenitiesList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  list-style: none;
+  padding: 0;
+}
+
+.amenityItem {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.checkIcon {
+  color: var(--color-secondary-dark);
+  font-weight: bold;
+}
+
+.sidebar {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.bookingCard {
+  background-color: var(--color-surface);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.priceHeader {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.price {
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.perDay {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin-left: var(--spacing-xs);
+}
+
+.ratingValue {
+  background-color: var(--color-background);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+.infoRow strong {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.bookAction {
+  display: block;
+  margin-bottom: var(--spacing-md);
+}
+
+.guarantee {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 992px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+  }
+  .imageHeader {
+    min-height: 300px;
+  }
+  .container {
+    margin-top: -60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .amenitiesList {
+    grid-template-columns: 1fr;
+  }
+  .mainContent, .bookingCard {
+    padding: var(--spacing-lg);
+  }
+}

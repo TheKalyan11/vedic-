@@ -1,0 +1,93 @@
+.footer {
+  background-color: #1A1A1A; /* Very dark slate */
+  color: #D9D9D9;
+  padding-top: var(--spacing-3xl);
+  border-top: 4px solid var(--color-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--spacing-2xl);
+}
+
+.brand .logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  gap: 0.25rem;
+}
+.logoVedic { color: var(--color-primary); }
+.logoVenues { color: var(--color-secondary); }
+
+.description {
+  line-height: 1.8;
+  max-width: 400px;
+  font-size: 1rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.links h3 {
+  color: var(--color-surface);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  display: inline-block;
+}
+
+.links h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 40px;
+  background-color: var(--color-primary);
+}
+
+.links a, .address {
+  color: #B3B3B3;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.links a:hover {
+  color: var(--color-secondary-light);
+}
+
+.bottom {
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-3xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.875rem;
+  color: #8C8C8C;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+}

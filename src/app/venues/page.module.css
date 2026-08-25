@@ -1,0 +1,129 @@
+.page {
+  padding-bottom: var(--spacing-3xl);
+  background-color: var(--color-background);
+  min-height: calc(100vh - 140px);
+}
+
+.hero {
+  background-color: var(--color-surface);
+  padding: var(--spacing-3xl) 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.filterSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-2xl);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-lg);
+}
+
+.filters {
+  display: flex;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 250px;
+}
+
+.filterGroup label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-md) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  appearance: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.select:hover {
+  border-color: var(--color-text-muted);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.1);
+}
+
+.selectArrow {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.resultsCount {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.venueGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .filterSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-lg);
+  }
+  
+  .filters {
+    width: 100%;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .filterGroup {
+    min-width: 100%;
+  }
+}
