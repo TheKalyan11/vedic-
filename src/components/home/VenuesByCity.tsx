@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useLocation } from '../../context/LocationContext';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './VenuesByCity.module.css';
 
 interface CityCardItem {
@@ -146,6 +147,8 @@ export const VenuesByCity = () => {
     return () => clearInterval(interval);
   }, [isPaused, handleNext]);
 
+  const { t } = useLanguage();
+
   const handleCityClick = (cityName: string) => {
     setSelectedLocation(cityName);
   };
@@ -155,12 +158,12 @@ export const VenuesByCity = () => {
   return (
     <section className={styles.citySection} aria-label="Explore Wedding Venues by City">
       <div className={styles.container}>
-        {/* Header with Title, Grammatically Correct Subtitle, and Navigation Arrow Buttons */}
+        {/* Header with Title, Subtitle, and Navigation Arrow Buttons */}
         <div className={styles.header}>
           <div>
-            <span className={styles.sectionBadge}>POPULAR DESTINATIONS</span>
-            <h2 className={styles.title}>Venues by City</h2>
-            <p className={styles.subtitle}>Explore banquet halls, marriage lawns, resorts, mandapams, and celebration spaces across top Indian cities</p>
+            <span className={styles.sectionBadge}>{t('venuesByCity.badge')}</span>
+            <h2 className={styles.title}>{t('venuesByCity.title')}</h2>
+            <p className={styles.subtitle}>{t('venuesByCity.subtitle')}</p>
           </div>
           
           <div className={styles.navButtons}>
@@ -213,7 +216,9 @@ export const VenuesByCity = () => {
                 <div className={styles.overlay} />
                 <div className={styles.cardContent}>
                   <h3 className={styles.cityName}>{city.name}</h3>
-                  <p className={styles.venueCount}>{city.count}</p>
+                  <p className={styles.venueCount}>
+                    {t('venuesByCity.spacesCount', { count: city.count.replace(' Spaces', '') })}
+                  </p>
                 </div>
               </Link>
             ))}

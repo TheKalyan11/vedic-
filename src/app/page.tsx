@@ -1,13 +1,11 @@
 import { venueService } from '../services/mockApi';
-import { VenueCard } from '../components/ui/VenueCard';
-import { Button } from '../components/ui/Button';
 import { Hero } from '../components/home/Hero';
 import { ScrollingBanner } from '../components/home/ScrollingBanner';
+import { FeaturedVenuesSection } from '../components/home/FeaturedVenuesSection';
 import { VenuesByCity } from '../components/home/VenuesByCity';
 import { PopularVendors } from '../components/home/PopularVendors';
 import { WeddingCategories } from '../components/home/WeddingCategories';
 import { PhilosophySection } from '../components/home/PhilosophySection';
-import Link from 'next/link';
 import styles from './page.module.css';
 
 export default async function Home() {
@@ -23,25 +21,7 @@ export default async function Home() {
       <ScrollingBanner />
 
       {/* Featured Collection */}
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <span className={styles.sectionSub}>Exclusive Collection</span>
-              <h2 className={styles.sectionTitle}>Featured Popular Venues</h2>
-            </div>
-            <Link href="/venues" className={styles.viewAll}>
-              Explore all venues <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-          
-          <div className={styles.venueGrid}>
-            {featuredVenues.map((venue) => (
-              <VenueCard key={venue.id} venue={venue} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeaturedVenuesSection venues={featuredVenues} />
 
       {/* Venues by City Section */}
       <VenuesByCity />

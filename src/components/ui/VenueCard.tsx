@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Venue } from '../../models/types';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './VenueCard.module.css';
 
 interface VenueCardProps {
@@ -10,6 +11,8 @@ interface VenueCardProps {
 }
 
 export const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
+  const { t } = useLanguage();
+
   const getCategoryName = (v: Venue) => {
     if (v.name.includes('Banquet')) return 'Banquet Hall';
     if (v.name.includes('Marriage Garden') || v.name.includes('Lawns')) return 'Marriage Garden / Lawns';
@@ -43,8 +46,8 @@ export const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
         
         {/* Floating Top Badges (Left Tags Only) */}
         <div className={styles.badgeContainer}>
-          <span className={styles.badgeOrange}>PRICE ON REQUEST</span>
-          <span className={styles.badgeGreen}>VERIFIED</span>
+          <span className={styles.badgeOrange}>{t('common.priceOnRequest').toUpperCase()}</span>
+          <span className={styles.badgeGreen}>{t('common.verified')}</span>
         </div>
       </div>
 
@@ -77,7 +80,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
               <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
-            <span>{venue.capacity} Guests</span>
+            <span>{venue.capacity} {t('common.guests')}</span>
           </div>
 
           <span className={styles.specDivider}>|</span>
@@ -89,7 +92,7 @@ export const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
               <path d="M5 10v10M12 10v10M19 10v10"/>
               <path d="M2 20h20"/>
             </svg>
-            <span>Indoor & Lawn</span>
+            <span>{t('common.indoorAndLawn')}</span>
           </div>
 
           <span className={styles.specDivider}>|</span>
@@ -100,13 +103,13 @@ export const VenueCard: React.FC<VenueCardProps> = ({ venue }) => {
               <path d="M12 4a8 8 0 0 0-8 8h16a8 8 0 0 0-8-8zM2 15h20M12 15v5M8 20h8"/>
               <circle cx="12" cy="2.5" r="1" fill="currentColor"/>
             </svg>
-            <span>Pure Veg</span>
+            <span>{t('common.pureVeg')}</span>
           </div>
         </div>
 
         {/* Footer / Managed by */}
         <div className={styles.footerRow}>
-          MANAGED BY <span className={styles.listedBrand}>VEDIC VENUES</span>
+          {t('common.managedBy').toUpperCase()} <span className={styles.listedBrand}>{t('common.brandName')}</span>
         </div>
       </div>
     </div>

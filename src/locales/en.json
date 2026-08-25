@@ -1,0 +1,138 @@
+{
+  "common": {
+    "priceOnRequest": "Price on Request",
+    "verified": "VERIFIED",
+    "verifiedPro": "VERIFIED PRO",
+    "managedBy": "MANAGED BY",
+    "brandName": "VEDIC VENUES",
+    "guests": "Guests",
+    "indoorAndLawn": "Indoor & Lawn",
+    "pureVeg": "Pure Veg",
+    "startingAt": "Starting at",
+    "from": "from",
+    "inquire": "Inquire",
+    "inquireVendor": "Inquire vendor",
+    "inquireVenue": "Inquire Venue",
+    "exploreAll": "Explore all",
+    "exploreAllVenues": "Explore all venues",
+    "exploreAllVendors": "Explore all vendors",
+    "exploreAllCategories": "Explore all categories",
+    "bookNow": "Book Venue",
+    "save": "Save",
+    "saved": "Saved",
+    "callUs": "Call Concierge",
+    "selectLanguage": "Select Language",
+    "language": "Language",
+    "search": "Search"
+  },
+  "nav": {
+    "tagline": "India's Premier Vedic & Wedding Space Discovery",
+    "venues": "Venues",
+    "vendors": "Vendors",
+    "weddings": "Weddings",
+    "photos": "Photos",
+    "invites": "E-Invites",
+    "blog": "Blog",
+    "genie": "Genie",
+    "login": "Log In",
+    "downloadApp": "Download App",
+    "writeReview": "Write A Review",
+    "searchPlaceholder": "Search for Venues, Vendors, Decors...",
+    "selectLocation": "Select City or State",
+    "searchCityPlaceholder": "Search City, State..."
+  },
+  "hero": {
+    "phrases": [
+      "Plan a Sacred Wedding in {location}",
+      "Celebrate an Auspicious Birthday in {location}",
+      "Host a Traditional Annaprashan in {location}",
+      "Plan a Grand Reception in {location}",
+      "Celebrate Your Sacred Occasion in {location}"
+    ],
+    "find": "Find",
+    "in": "in",
+    "searchDiscovery": "Find {type} in {location}"
+  },
+  "highlights": [
+    "100% Verified Vedic Spaces",
+    "Transparent Pricing & No Hidden Charges",
+    "Sacred Astrological & Ritual Ready Mandaps",
+    "Strictly Sattvic Pure Veg Catering Allowed",
+    "500+ Heritage Palaces & Luxury Mandapams",
+    "Dedicated Wedding & Event Concierge",
+    "Direct Host & Vendor Negotiations"
+  ],
+  "featuredVenues": {
+    "badge": "Exclusive Collection",
+    "title": "Featured Popular Venues",
+    "subtitle": "Handpicked grand banquet halls, royal palace mandaps, and serene garden lawns"
+  },
+  "venuesByCity": {
+    "badge": "POPULAR DESTINATIONS",
+    "title": "Venues by City",
+    "subtitle": "Explore banquet halls, marriage lawns, resorts, mandapams, and celebration spaces across top Indian cities",
+    "spacesCount": "{count} Spaces"
+  },
+  "popularVendors": {
+    "badge": "TRUSTED WEDDING PARTNERS",
+    "title": "Popular Vendors",
+    "subtitle": "Book top-rated wedding photographers, makeup artists, decorators, and catering specialists",
+    "tabs": {
+      "all": "All Vendors",
+      "photographers": "Photographers",
+      "makeup": "Bridal Makeup",
+      "decor": "Planning & Decor",
+      "mehndi": "Mehndi",
+      "catering": "Catering",
+      "music": "Music & Dance"
+    }
+  },
+  "weddingCategories": {
+    "badge": "EVERYTHING YOU NEED",
+    "title": "Wedding Categories",
+    "subtitle": "Explore all essential celebration services, venues, and handcrafted experiences for your special day",
+    "items": {
+      "venues": "Venues",
+      "photographers": "Photographers",
+      "makeup": "Bridal Makeup",
+      "decor": "Planning & Decor",
+      "wear": "Bridal & Groom Wear",
+      "mehndi": "Mehndi Artists",
+      "catering": "Pure Veg Catering",
+      "music": "Music & Dance",
+      "invites": "Invites & Gifts",
+      "pandit": "Pandit & Astro Services"
+    }
+  },
+  "philosophy": {
+    "badge": "Our Philosophy",
+    "title": "Where Sacred Tradition Meets",
+    "titleHighlight": "Regal Splendor",
+    "description": "We believe the venue where you solemnize your most sacred vows should be as timeless as the traditions you honor. Every space in our portfolio is curated to preserve Vedic purity, architectural grandeur, and modern luxury.",
+    "pillar1Title": "Sacred Astrological & Ritual Harmony",
+    "pillar1Desc": "Sanctified spaces purpose-designed for authentic Vivaha rituals, sacred Homa fires, and strictly Sattvic pure vegetarian dining traditions.",
+    "pillar2Title": "Architectural Grandeur & Heritage",
+    "pillar2Desc": "Handpicked centuries-old royal palaces, heritage havelis, and carved Dravidian Kalyana Mandapams equipped with 5-star hospitality.",
+    "pillar3Title": "Concierge Assurance & Peace of Mind",
+    "pillar3Desc": "Transparent pricing, vetted vendor networks, and dedicated celebration managers ensuring flawless execution of your dream event.",
+    "cta": "Explore Curated Venues",
+    "trustScore": "4.98 / 5.0",
+    "trustLabel": "Host Trust & Ritual Integrity"
+  },
+  "venueDetail": {
+    "back": "← Back to Venues",
+    "capacity": "Maximum Capacity",
+    "capacityValue": "Up to {capacity} guests",
+    "amenities": "Key Amenities",
+    "description": "Venue Overview",
+    "requestPricing": "Request Pricing & Availability",
+    "managedByNote": "Managed directly through Vedic Venues Concierge"
+  },
+  "footer": {
+    "description": "India's sacred space & wedding reservation platform. Curating timeless heritage palaces, sacred mandapams, and luxury celebration halls.",
+    "quickLinks": "Quick Links",
+    "topCities": "Top Cities",
+    "contact": "Contact Concierge",
+    "rights": "All rights reserved. Vedic Venues."
+  }
+}

@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from '../../context/LocationContext';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './Hero.module.css';
 
 const HERO_IMAGES = [
@@ -140,6 +141,7 @@ const SEARCH_COLUMNS: DropdownSection[][] = [
 
 export const Hero = () => {
   const { selectedLocation } = useLocation();
+  const { t } = useLanguage();
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
@@ -151,11 +153,11 @@ export const Hero = () => {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const heroPhrases = [
-    `Plan a Wedding in ${selectedLocation}`,
-    `Celebrate a Birthday in ${selectedLocation}`,
-    `Host an Annaprashan in ${selectedLocation}`,
-    `Plan a Reception in ${selectedLocation}`,
-    `Celebrate a Special Occasion in ${selectedLocation}`
+    t('hero.phrases.0', { location: selectedLocation }),
+    t('hero.phrases.1', { location: selectedLocation }),
+    t('hero.phrases.2', { location: selectedLocation }),
+    t('hero.phrases.3', { location: selectedLocation }),
+    t('hero.phrases.4', { location: selectedLocation })
   ];
 
   // Close dropdown when clicking outside
@@ -254,7 +256,7 @@ export const Hero = () => {
             
             {/* Main Text Area */}
             <div className={styles.searchText}>
-              Find {selectedSearchType} in {selectedLocation}
+              {t('hero.searchDiscovery', { type: selectedSearchType, location: selectedLocation })}
             </div>
             
             {/* Right Arrow */}

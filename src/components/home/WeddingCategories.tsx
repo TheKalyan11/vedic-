@@ -2,10 +2,12 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './WeddingCategories.module.css';
 
 interface WeddingCategory {
-  title: string;
+  key: string;
+  defaultTitle: string;
   count: string;
   href: string;
   image: string;
@@ -16,7 +18,8 @@ const DEFAULT_FALLBACK = 'https://images.unsplash.com/photo-1519167758481-83f550
 
 const CATEGORIES_DATA: WeddingCategory[] = [
   {
-    title: 'Venues',
+    key: 'venues',
+    defaultTitle: 'Venues',
     count: '2,400+ Spaces',
     href: '/venues',
     image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&auto=format&fit=crop&q=80',
@@ -27,7 +30,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Photographers',
+    key: 'photographers',
+    defaultTitle: 'Photographers',
     count: '1,850+ Studios',
     href: '/vendors?category=photographers',
     image: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&auto=format&fit=crop&q=80',
@@ -40,7 +44,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Bridal Makeup',
+    key: 'makeup',
+    defaultTitle: 'Bridal Makeup',
     count: '980+ Artists',
     href: '/vendors?category=makeup',
     image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&auto=format&fit=crop&q=80',
@@ -52,7 +57,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Planning & Decor',
+    key: 'decor',
+    defaultTitle: 'Planning & Decor',
     count: '760+ Planners',
     href: '/vendors?category=decor',
     image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&auto=format&fit=crop&q=80',
@@ -65,7 +71,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Bridal & Groom Wear',
+    key: 'wear',
+    defaultTitle: 'Bridal & Groom Wear',
     count: '1,150+ Designers',
     href: '/vendors?category=wear',
     image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&auto=format&fit=crop&q=80',
@@ -77,7 +84,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Mehndi Artists',
+    key: 'mehndi',
+    defaultTitle: 'Mehndi Artists',
     count: '640+ Artists',
     href: '/vendors?category=mehndi',
     image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80',
@@ -90,7 +98,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Pure Veg Catering',
+    key: 'catering',
+    defaultTitle: 'Pure Veg Catering',
     count: '820+ Caterers',
     href: '/vendors?category=catering',
     image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=800&auto=format&fit=crop&q=80',
@@ -103,7 +112,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Music & Dance',
+    key: 'music',
+    defaultTitle: 'Music & Dance',
     count: '540+ Troupes',
     href: '/vendors?category=music',
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&auto=format&fit=crop&q=80',
@@ -116,7 +126,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Invites & Gifts',
+    key: 'invites',
+    defaultTitle: 'Invites & Gifts',
     count: '430+ Designers',
     href: '/invites',
     image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&auto=format&fit=crop&q=80',
@@ -128,7 +139,8 @@ const CATEGORIES_DATA: WeddingCategory[] = [
     ),
   },
   {
-    title: 'Pandit & Astro Services',
+    key: 'pandit',
+    defaultTitle: 'Pandit & Astro Services',
     count: '390+ Acharyas',
     href: '/vendors?category=pandit',
     image: 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800&auto=format&fit=crop&q=80',
@@ -142,31 +154,31 @@ const CATEGORIES_DATA: WeddingCategory[] = [
 ];
 
 export const WeddingCategories: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className={styles.categoriesSection} aria-label="Wedding Categories">
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
           <div>
-            <span className={styles.sectionBadge}>EVERYTHING YOU NEED</span>
-            <h2 className={styles.title}>Wedding Categories</h2>
-            <p className={styles.subtitle}>
-              Explore all essential celebration services, venues, and handcrafted experiences for your special day
-            </p>
+            <span className={styles.sectionBadge}>{t('weddingCategories.badge')}</span>
+            <h2 className={styles.title}>{t('weddingCategories.title')}</h2>
+            <p className={styles.subtitle}>{t('weddingCategories.subtitle')}</p>
           </div>
 
           <Link href="/vendors" className={styles.viewAllLink}>
-            Explore all categories <span aria-hidden="true">→</span>
+            {t('common.exploreAllCategories')} <span aria-hidden="true">→</span>
           </Link>
         </div>
 
         {/* 10-Card Category Grid (2 Rows of 5) */}
         <div className={styles.grid}>
           {CATEGORIES_DATA.map((cat) => (
-            <Link key={cat.title} href={cat.href} className={styles.categoryCard}>
+            <Link key={cat.key} href={cat.href} className={styles.categoryCard}>
               <img
                 src={cat.image}
-                alt={cat.title}
+                alt={t(`weddingCategories.items.${cat.key}`)}
                 className={styles.bgImage}
                 loading="lazy"
                 onError={(e) => {
@@ -182,7 +194,7 @@ export const WeddingCategories: React.FC = () => {
 
               {/* Bottom Info Content */}
               <div className={styles.content}>
-                <h3 className={styles.categoryTitle}>{cat.title}</h3>
+                <h3 className={styles.categoryTitle}>{t(`weddingCategories.items.${cat.key}`)}</h3>
                 <p className={styles.countText}>{cat.count}</p>
               </div>
             </Link>

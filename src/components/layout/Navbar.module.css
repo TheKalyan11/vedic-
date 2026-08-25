@@ -99,6 +99,102 @@
   transform: rotate(180deg);
 }
 
+/* Language Selector Container & Button */
+.languageContainer {
+  position: relative;
+}
+
+.languageButton {
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  color: #2C3E50;
+  font-family: var(--font-outfit, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+}
+
+.languageButton:hover,
+.languageButtonActive {
+  background: #FDFDFD;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.globeIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.selectedLangText {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.languageDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 170px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  z-index: 2000;
+  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.languageList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.languageItem {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-outfit, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.15s ease;
+}
+
+.languageItem:hover {
+  background: #FFF5EC;
+  color: var(--color-primary, #D35400);
+}
+
+.languageItemActive {
+  background: #FFF5EC;
+  color: var(--color-primary, #D35400);
+  font-weight: 700;
+}
+
+.langCheckIcon {
+  width: 16px;
+  height: 16px;
+  color: var(--color-primary, #D35400);
+}
+
 /* Location Mega Dropdown Modal */
 .locationMegaDropdown {
   position: absolute;

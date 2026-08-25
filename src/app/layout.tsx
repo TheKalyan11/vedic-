@@ -4,6 +4,7 @@ import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { FloatingWhatsApp } from "../components/ui/FloatingWhatsApp";
 import { LocationProvider } from "../context/LocationContext";
+import { LanguageProvider } from "../context/LanguageContext";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -29,14 +30,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${lora.variable}`}>
       <body>
-        <LocationProvider>
-          <Navbar />
-          <main style={{ minHeight: 'calc(100vh - 140px)' }}>
-            {children}
-          </main>
-          <FloatingWhatsApp />
-          <Footer />
-        </LocationProvider>
+        <LanguageProvider>
+          <LocationProvider>
+            <Navbar />
+            <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+              {children}
+            </main>
+            <FloatingWhatsApp />
+            <Footer />
+          </LocationProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

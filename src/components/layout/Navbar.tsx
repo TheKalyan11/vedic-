@@ -5,17 +5,21 @@ import Link from 'next/link';
 import { APP_CONFIG } from '../../config/constants';
 import { LoginButton } from '../ui/LoginButton';
 import { useLocation } from '../../context/LocationContext';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './Navbar.module.css';
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { selectedLocation, setSelectedLocation } = useLocation();
+  const { language, setLanguage, t, languages } = useLanguage();
   const [locationSearch, setLocationSearch] = useState('');
   
   const locationRef = useRef<HTMLDivElement>(null);
+  const languageRef = useRef<HTMLDivElement>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -27,11 +31,14 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close location dropdown when clicking outside
+  // Close location & language dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
         setIsLocationOpen(false);
+      }
+      if (languageRef.current && !languageRef.current.contains(event.target as Node)) {
+        setIsLanguageOpen(false);
       }
       if (navContainerRef.current && !navContainerRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
@@ -74,23 +81,45 @@ export const Navbar = () => {
     }
   };
 
+  const getLocalizedNavLabel = (label: string) => {
+    switch (label) {
+      case 'Venues': return t('nav.venues');
+      case 'Vendors': return t('nav.vendors');
+      case 'Weddings': return t('nav.weddings');
+      case 'Photos': return t('nav.photos');
+      case 'E-Invites': return t('nav.invites');
+      case 'Blog': return t('nav.blog');
+      case 'Genie': return t('nav.genie');
+      default: return label;
+    }
+  };
+
+  const getLocalizedActionLabel = (label: string) => {
+    if (label === 'Write A Review') return t('nav.writeReview');
+    if (label === 'Download App') return t('nav.downloadApp');
+    return label;
+  };
+
   return (
     <div className={styles.navWrapper} ref={navContainerRef}>
       {/* 1. Top Navigation Bar */}
       <div className={styles.topBar}>
         <div className={styles.topBarContainer}>
-          {/* Left: Tagline + Location Selector Box */}
+          {/* Left: Tagline + Location Selector Box + Language Selector */}
           <div className={styles.topBarLeft}>
-            <span className={styles.tagline}>{APP_CONFIG.navigation.topBar.tagline}</span>
+            <span className={styles.tagline}>{t('nav.tagline')}</span>
             
             {/* Location Selector Mega Dropdown Container */}
             <div className={styles.locationContainer} ref={locationRef}>
               <button 
                 type="button"
                 className={`${styles.locationButton} ${isLocationOpen ? styles.locationButtonActive : ''}`}
-                onClick={() => setIsLocationOpen(!isLocationOpen)}
+                onClick={() => {
+                  setIsLocationOpen(!isLocationOpen);
+                  setIsLanguageOpen(false);
+                }}
                 aria-expanded={isLocationOpen}
-                aria-label="Select City or State"
+                aria-label={t('nav.selectLocation')}
               >
                 <span className={styles.selectedCityText}>{selectedLocation}</span>
                 <span className={`${styles.dropdownArrow} ${isLocationOpen ? styles.dropdownArrowOpen : ''}`}>▼</span>
@@ -107,7 +136,7 @@ export const Navbar = () => {
                     </svg>
                     <input
                       type="text"
-                      placeholder="Search City, State..."
+                      placeholder={t('nav.searchCityPlaceholder')}
                       value={locationSearch}
                       onChange={(e) => setLocationSearch(e.target.value)}
                       className={styles.locationSearchInput}
@@ -146,6 +175,53 @@ export const Navbar = () => {
                       );
                     })}
                   </div>
+                </div>
+              )}
+            </div>
+
+            {/* Language Selector Dropdown Container */}
+            <div className={styles.languageContainer} ref={languageRef}>
+              <button 
+                type="button"
+                className={`${styles.languageButton} ${isLanguageOpen ? styles.languageButtonActive : ''}`}
+                onClick={() => {
+                  setIsLanguageOpen(!isLanguageOpen);
+                  setIsLocationOpen(false);
+                }}
+                aria-expanded={isLanguageOpen}
+                aria-label={t('common.selectLanguage')}
+              >
+                <span className={styles.globeIcon}>🌐</span>
+                <span className={styles.selectedLangText}>
+                  {languages.find((l) => l.code === language)?.nativeName || 'English'}
+                </span>
+                <span className={`${styles.dropdownArrow} ${isLanguageOpen ? styles.dropdownArrowOpen : ''}`}>▼</span>
+              </button>
+
+              {/* Language Dropdown Menu */}
+              {isLanguageOpen && (
+                <div className={styles.languageDropdown}>
+                  <ul className={styles.languageList}>
+                    {languages.map((langOption) => (
+                      <li key={langOption.code}>
+                        <button
+                          type="button"
+                          className={`${styles.languageItem} ${language === langOption.code ? styles.languageItemActive : ''}`}
+                          onClick={() => {
+                            setLanguage(langOption.code);
+                            setIsLanguageOpen(false);
+                          }}
+                        >
+                          <span>{langOption.nativeName} ({langOption.label})</span>
+                          {language === langOption.code && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.langCheckIcon}>
+                              <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                          )}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </div>
@@ -217,7 +293,7 @@ export const Navbar = () => {
                     </svg>
                   )}
 
-                  <span className={styles.actionText}>{action.label}</span>
+                  <span className={styles.actionText}>{getLocalizedActionLabel(action.label)}</span>
                 </Link>
               </React.Fragment>
             ))}
@@ -256,7 +332,7 @@ export const Navbar = () => {
                       href={item.href} 
                       className={`${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}
                     >
-                      {item.label}
+                      {getLocalizedNavLabel(item.label)}
                     </Link>
                   </div>
                 );

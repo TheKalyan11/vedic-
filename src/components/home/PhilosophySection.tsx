@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './PhilosophySection.module.css';
 
 const MAIN_IMAGE = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&auto=format&fit=crop&q=80';
@@ -9,18 +10,21 @@ const SECONDARY_IMAGE = 'https://images.unsplash.com/photo-1596176530529-78163a4
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&auto=format&fit=crop&q=80';
 
 export const PhilosophySection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className={styles.philosophySection} aria-label="Our Philosophy">
       <div className={styles.container}>
         <div className={styles.grid}>
           {/* Left Narrative Column */}
           <div className={styles.contentCol}>
-            <span className={styles.badge}>Our Philosophy</span>
+            <span className={styles.badge}>{t('philosophy.badge')}</span>
             <h2 className={styles.title}>
-              Where Sacred Tradition Meets <span className={styles.titleHighlight}>Regal Splendor</span>
+              {t('philosophy.title')}{' '}
+              <span className={styles.titleHighlight}>{t('philosophy.titleHighlight')}</span>
             </h2>
             <p className={styles.description}>
-              We believe the venue where you solemnize your most sacred vows should be as timeless as the traditions you honor. Every space in our portfolio is curated to preserve Vedic purity, architectural grandeur, and modern luxury.
+              {t('philosophy.description')}
             </p>
 
             {/* 3 Core Value Pillars */}
@@ -33,10 +37,8 @@ export const PhilosophySection: React.FC = () => {
                   </svg>
                 </div>
                 <div className={styles.pillarText}>
-                  <h3 className={styles.pillarTitle}>Sacred Astrological & Ritual Harmony</h3>
-                  <p className={styles.pillarDesc}>
-                    Sanctified spaces purpose-designed for authentic Vivaha rituals, sacred Homa fires, and strictly Sattvic pure vegetarian dining traditions.
-                  </p>
+                  <h3 className={styles.pillarTitle}>{t('philosophy.pillar1Title')}</h3>
+                  <p className={styles.pillarDesc}>{t('philosophy.pillar1Desc')}</p>
                 </div>
               </div>
 
@@ -48,10 +50,8 @@ export const PhilosophySection: React.FC = () => {
                   </svg>
                 </div>
                 <div className={styles.pillarText}>
-                  <h3 className={styles.pillarTitle}>Architectural Grandeur & Heritage</h3>
-                  <p className={styles.pillarDesc}>
-                    Handpicked centuries-old royal palaces, heritage havelis, and carved Dravidian Kalyana Mandapams equipped with 5-star hospitality.
-                  </p>
+                  <h3 className={styles.pillarTitle}>{t('philosophy.pillar2Title')}</h3>
+                  <p className={styles.pillarDesc}>{t('philosophy.pillar2Desc')}</p>
                 </div>
               </div>
 
@@ -64,17 +64,15 @@ export const PhilosophySection: React.FC = () => {
                   </svg>
                 </div>
                 <div className={styles.pillarText}>
-                  <h3 className={styles.pillarTitle}>Concierge Assurance & Peace of Mind</h3>
-                  <p className={styles.pillarDesc}>
-                    Transparent pricing, vetted vendor networks, and dedicated celebration managers ensuring flawless execution of your dream event.
-                  </p>
+                  <h3 className={styles.pillarTitle}>{t('philosophy.pillar3Title')}</h3>
+                  <p className={styles.pillarDesc}>{t('philosophy.pillar3Desc')}</p>
                 </div>
               </div>
             </div>
 
             {/* Direct CTA */}
             <Link href="/venues" className={styles.ctaBtn}>
-              Explore Curated Venues <span aria-hidden="true">→</span>
+              {t('philosophy.cta')} <span aria-hidden="true">→</span>
             </Link>
           </div>
 
@@ -115,8 +113,8 @@ export const PhilosophySection: React.FC = () => {
                 </svg>
               </div>
               <div className={styles.trustBadgeText}>
-                <span className={styles.trustBadgeScore}>4.98 / 5.0</span>
-                <span className={styles.trustBadgeLabel}>Host Trust & Ritual Integrity</span>
+                <span className={styles.trustBadgeScore}>{t('philosophy.trustScore')}</span>
+                <span className={styles.trustBadgeLabel}>{t('philosophy.trustLabel')}</span>
               </div>
             </div>
           </div>

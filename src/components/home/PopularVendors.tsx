@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '../../context/LanguageContext';
 import styles from './PopularVendors.module.css';
 
 interface VendorItem {
   id: string;
   name: string;
   category: string;
+  categoryKey: string;
   location: string;
   rating: number;
   reviews: number;
@@ -17,14 +19,14 @@ interface VendorItem {
 
 const DEFAULT_FALLBACK = 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&auto=format&fit=crop&q=80';
 
-const CATEGORIES = [
-  'All Vendors',
-  'Photographers',
-  'Bridal Makeup',
-  'Planning & Decor',
-  'Mehndi',
-  'Catering',
-  'Music & Dance',
+const CATEGORY_KEYS = [
+  { key: 'all', filter: 'All' },
+  { key: 'photographers', filter: 'Photography' },
+  { key: 'makeup', filter: 'Bridal Artistry' },
+  { key: 'decor', filter: 'Decor' },
+  { key: 'mehndi', filter: 'Henna' },
+  { key: 'catering', filter: 'Catering' },
+  { key: 'music', filter: 'Sangeet' },
 ] as const;
 
 const VENDORS_DATA: VendorItem[] = [
@@ -32,6 +34,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-1',
     name: 'Omkara Wedding Films',
     category: 'Candid & Cinematic Photography',
+    categoryKey: 'photographers',
     location: 'Delhi NCR · Pan India',
     rating: 4.9,
     reviews: 142,
@@ -42,6 +45,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-2',
     name: 'Sitaara Bridal Studio',
     category: 'HD Airbrush & Vedic Bridal Artistry',
+    categoryKey: 'makeup',
     location: 'Mumbai & Pune',
     rating: 5.0,
     reviews: 98,
@@ -52,6 +56,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-3',
     name: 'Mandapam Royal Decor',
     category: 'Grand Floral & Palace Decorators',
+    categoryKey: 'decor',
     location: 'Jaipur & Udaipur',
     rating: 4.9,
     reviews: 115,
@@ -62,6 +67,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-4',
     name: 'Aishwarya Mehendi Art',
     category: 'Organic Bridal Henna & Figures',
+    categoryKey: 'mehndi',
     location: 'Bangalore & Chennai',
     rating: 4.8,
     reviews: 86,
@@ -72,6 +78,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-5',
     name: 'Annapurna Sattvic Feasts',
     category: 'Pure Vegetarian Royal Catering',
+    categoryKey: 'catering',
     location: 'Delhi NCR · Varanasi',
     rating: 4.9,
     reviews: 130,
@@ -82,6 +89,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-6',
     name: 'Sangeet Symphony Band',
     category: 'Live Shehnai & Sangeet DJs',
+    categoryKey: 'music',
     location: 'Mumbai & Hyderabad',
     rating: 4.9,
     reviews: 74,
@@ -92,6 +100,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-7',
     name: 'Vaidarbhi Silk Couture',
     category: 'Royal Kanjeevarams & Lehengas',
+    categoryKey: 'wear',
     location: 'Chennai & Hyderabad',
     rating: 5.0,
     reviews: 110,
@@ -102,6 +111,7 @@ const VENDORS_DATA: VendorItem[] = [
     id: 'v-8',
     name: 'Rajputana Regal Wear',
     category: 'Bespoke Zari Sherwanis & Safas',
+    categoryKey: 'wear',
     location: 'Jaipur & Delhi NCR',
     rating: 4.8,
     reviews: 65,
@@ -111,18 +121,14 @@ const VENDORS_DATA: VendorItem[] = [
 ];
 
 export const PopularVendors: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All Vendors');
+  const [selectedKey, setSelectedKey] = useState<string>('all');
+  const { t } = useLanguage();
 
-  const filteredVendors = selectedCategory === 'All Vendors'
+  const filteredVendors = selectedKey === 'all'
     ? VENDORS_DATA
     : VENDORS_DATA.filter((v) => {
-        if (selectedCategory === 'Photographers') return v.category.includes('Photography');
-        if (selectedCategory === 'Bridal Makeup') return v.category.includes('Bridal Artistry');
-        if (selectedCategory === 'Planning & Decor') return v.category.includes('Decor');
-        if (selectedCategory === 'Mehndi') return v.category.includes('Henna');
-        if (selectedCategory === 'Catering') return v.category.includes('Catering');
-        if (selectedCategory === 'Music & Dance') return v.category.includes('Sangeet');
-        return true;
+        const item = CATEGORY_KEYS.find((c) => c.key === selectedKey);
+        return item ? v.category.includes(item.filter) : true;
       });
 
   return (
@@ -131,28 +137,26 @@ export const PopularVendors: React.FC = () => {
         {/* Header */}
         <div className={styles.header}>
           <div>
-            <span className={styles.sectionBadge}>TRUSTED WEDDING PARTNERS</span>
-            <h2 className={styles.title}>Popular Vendors</h2>
-            <p className={styles.subtitle}>
-              Book top-rated wedding photographers, makeup artists, decorators, and catering specialists
-            </p>
+            <span className={styles.sectionBadge}>{t('popularVendors.badge')}</span>
+            <h2 className={styles.title}>{t('popularVendors.title')}</h2>
+            <p className={styles.subtitle}>{t('popularVendors.subtitle')}</p>
           </div>
 
           <Link href="/vendors" className={styles.viewAllLink}>
-            Explore all vendors <span aria-hidden="true">→</span>
+            {t('common.exploreAllVendors')} <span aria-hidden="true">→</span>
           </Link>
         </div>
 
         {/* Category Tabs */}
         <div className={styles.tabsWrapper}>
-          {CATEGORIES.map((cat) => (
+          {CATEGORY_KEYS.map((cat) => (
             <button
-              key={cat}
+              key={cat.key}
               type="button"
-              className={`${styles.tabBtn} ${selectedCategory === cat ? styles.activeTab : ''}`}
-              onClick={() => setSelectedCategory(cat)}
+              className={`${styles.tabBtn} ${selectedKey === cat.key ? styles.activeTab : ''}`}
+              onClick={() => setSelectedKey(cat.key)}
             >
-              {cat}
+              {t(`popularVendors.tabs.${cat.key}`)}
             </button>
           ))}
         </div>
@@ -187,7 +191,7 @@ export const PopularVendors: React.FC = () => {
                   <svg viewBox="0 0 24 24" fill="currentColor" className={styles.checkShieldIcon}>
                     <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
                   </svg>
-                  VERIFIED PRO
+                  {t('common.verifiedPro')}
                 </div>
               </div>
 
@@ -205,8 +209,10 @@ export const PopularVendors: React.FC = () => {
                       <line x1="7" y1="7" x2="7.01" y2="7" />
                     </svg>
                     <span>
-                      {vendor.startingPrice.startsWith('₹') ? 'from ' : ''}
-                      <span className={styles.metaAmount}>{vendor.startingPrice}</span>
+                      {vendor.startingPrice.startsWith('₹') ? `${t('common.from')} ` : ''}
+                      <span className={styles.metaAmount}>
+                        {vendor.startingPrice === 'Price on Request' ? t('common.priceOnRequest') : vendor.startingPrice}
+                      </span>
                     </span>
                   </div>
 
@@ -223,7 +229,7 @@ export const PopularVendors: React.FC = () => {
                 {/* Bottom Action Row (Full Width Dark Pill CTA) */}
                 <div className={styles.actionRow}>
                   <Link href={`/vendors/${vendor.id}`} className={styles.primaryCta}>
-                    Inquire vendor
+                    {t('common.inquireVendor')}
                   </Link>
                 </div>
               </div>
