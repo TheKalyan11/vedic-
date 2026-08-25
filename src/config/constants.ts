@@ -51,8 +51,8 @@ export const APP_CONFIG = {
       { label: 'Weddings', href: '/real-weddings', dropdownType: 'weddings' },
       { label: 'Photos', href: '/photos', dropdownType: 'photos' },
       { label: 'E-Invites', href: '/invites', dropdownType: 'invites' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Genie', href: '/genie' },
+      { label: 'Blog', href: '/blog', dropdownType: 'blog' },
+      { label: 'Genie', href: '/genie', dropdownType: 'genie' },
     ],
     venuesDropdown: {
       byType: [
@@ -382,11 +382,151 @@ export const APP_CONFIG = {
       ]
     },
     invitesDropdown: {
-      title: 'Wedding Invitation Maker',
-      items: [
-        { label: 'Wedding Card Designs', href: '/invites?type=cards' },
-        { label: 'Invitation Video Templates', href: '/invites?type=video-templates' },
-        { label: 'Save the Date Templates', href: '/invites?type=save-the-date' },
+      columns: [
+        {
+          sections: [
+            {
+              title: 'Wedding Invitation Maker',
+              items: [
+                { label: 'Wedding Card Designs', href: '/invites?type=cards' },
+                { label: 'Invitation Video Templates', href: '/invites?type=video-templates' },
+                { label: 'Save the Date Templates', href: '/invites?type=save-the-date' },
+                { label: 'Digital WhatsApp Invites', href: '/invites?type=whatsapp-invites' },
+                { label: 'View All E-Invites', href: '/invites', isBold: true }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: 'Invitation Styles',
+              items: [
+                { label: 'Traditional Vedic Invites', href: '/invites?style=vedic' },
+                { label: 'Royal Rajasthani Scrolls', href: '/invites?style=royal' },
+                { label: 'Floral & Botanical Themes', href: '/invites?style=floral' },
+                { label: 'Modern Minimalist E-Cards', href: '/invites?style=minimal' },
+                { label: 'Explore All Styles', href: '/invites?style=all', isBold: true }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: 'Ceremonial Stationery',
+              items: [
+                { label: 'Engagement Invites', href: '/invites?ceremony=engagement' },
+                { label: 'Mehndi & Sangeet Cards', href: '/invites?ceremony=sangeet' },
+                { label: 'Haldi & Pooja Invites', href: '/invites?ceremony=haldi' },
+                { label: 'Annaprashan Ceremony Cards', href: '/invites?ceremony=annaprashan' },
+                { label: 'Birthday E-Invites', href: '/invites?ceremony=birthday' }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: 'Custom Design Concierge',
+              items: [
+                { label: 'Custom Video Animation', href: '/invites?custom=video', badge: 'POPULAR' },
+                { label: 'Custom Vedic Caricature', href: '/invites?custom=caricature' },
+                { label: 'Print + Digital Combo Box', href: '/invites?custom=combo' },
+                { label: 'Talk to Invite Designer', href: '/invites/contact', isBold: true }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    blogDropdown: {
+      columns: [
+        {
+          sections: [
+            {
+              title: 'Planning & Advice',
+              items: [
+                { label: 'Wedding Planning Checklist', href: '/blog?cat=planning' },
+                { label: 'Budget Planning Guides', href: '/blog?cat=budget' },
+                { label: 'Vedic Wedding Rituals Explained', href: '/blog?cat=vedic-rituals' },
+                { label: 'Muhurat & Auspicious Dates', href: '/blog?cat=muhurat' },
+                { label: 'View All Advice', href: '/blog?cat=all-advice', isBold: true }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: 'Fashion & Beauty',
+              items: [
+                { label: 'Bridal Lehenga Trends', href: '/blog?cat=bridal-trends' },
+                { label: 'Jewellery Styling Tips', href: '/blog?cat=jewellery-tips' },
+                { label: 'Groom Fashion Guides', href: '/blog?cat=groom-fashion' },
+                { label: 'Bridal Skincare Routines', href: '/blog?cat=skincare' },
+                { label: 'View All Trends', href: '/blog?cat=all-trends', isBold: true }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: 'Themes & Decor',
+              items: [
+                { label: 'Temple & Heritage Decors', href: '/blog?cat=heritage-decor' },
+                { label: 'Minimalist Mandap Ideas', href: '/blog?cat=mandap-ideas' },
+                { label: 'Eco-Friendly Weddings', href: '/blog?cat=eco-weddings' },
+                { label: 'Floral Stage Inspirations', href: '/blog?cat=floral-stage' },
+                { label: 'View All Decor Guides', href: '/blog?cat=all-decor', isBold: true }
+              ]
+            }
+          ]
+        },
+        {
+          sections: [
+            {
+              title: 'Real Stories',
+              items: [
+                { label: 'Celebrity Wedding Highlights', href: '/blog?cat=celebrity' },
+                { label: 'Destination Wedding Experiences', href: '/blog?cat=destination-stories' },
+                { label: 'Budget-Friendly Success Stories', href: '/blog?cat=real-stories' },
+                { label: 'Submit Your Wedding Story', href: '/blog/submit', isBold: true }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    genieDropdown: {
+      title: 'Vedic Genie - Your Personal Wedding & Venue Concierge',
+      subtitle: 'Free expert assistance from dedicated venue coordinators & smart planning tools',
+      services: [
+        {
+          title: 'Venue Recommendation Engine',
+          desc: 'Get matched with top-rated Vedic temples, luxury hotels & lawns within your budget.',
+          badge: 'AI POWERED',
+          href: '/genie?service=venues'
+        },
+        {
+          title: 'Dedicated Event Concierge',
+          desc: 'Direct consultation with seasoned venue experts to negotiate best pricing.',
+          badge: 'VEDIC EXPERT',
+          href: '/genie?service=concierge'
+        },
+        {
+          title: 'Budget & Guest Estimator',
+          desc: 'Accurately plan expenses for catering, decor, rituals, photography and stays.',
+          badge: 'FREE TOOL',
+          href: '/genie?service=calculator'
+        },
+        {
+          title: 'Auspicious Muhurat Finder',
+          desc: 'Discover verified Vedic shubh muhurat dates and timings for sacred nuptials.',
+          badge: 'VEDIC ASTRO',
+          href: '/genie?service=muhurat'
+        }
       ]
     }
   }

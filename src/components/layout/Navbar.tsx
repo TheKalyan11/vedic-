@@ -17,7 +17,8 @@ export const Navbar = () => {
   const [locationSearch, setLocationSearch] = useState('');
   
   const locationRef = useRef<HTMLDivElement>(null);
-  const navMenuRef = useRef<HTMLElement>(null);
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,13 +28,13 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdowns when clicking outside
+  // Close location dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
         setIsLocationOpen(false);
       }
-      if (navMenuRef.current && !navMenuRef.current.contains(event.target as Node)) {
+      if (navContainerRef.current && !navContainerRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
       }
     };
@@ -49,8 +50,33 @@ export const Navbar = () => {
     setLocationSearch('');
   };
 
+  const handleMouseEnterNav = (dropdownType?: string) => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (dropdownType) {
+      setActiveDropdown(dropdownType);
+    } else {
+      setActiveDropdown(null);
+    }
+  };
+
+  const handleMouseLeaveNav = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
+  const handleMouseEnterDropdown = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+  };
+
   return (
-    <div className={styles.navWrapper}>
+    <div className={styles.navWrapper} ref={navContainerRef}>
       {/* 1. Top Navigation Bar */}
       <div className={styles.topBar}>
         <div className={styles.topBarContainer}>
@@ -172,7 +198,10 @@ export const Navbar = () => {
       </div>
       
       {/* 2. Main Navigation Bar */}
-      <header className={`${styles.mainNavContainer} ${isScrolled ? styles.scrolled : ''}`}>
+      <header 
+        className={`${styles.mainNavContainer} ${isScrolled ? styles.scrolled : ''}`}
+        onMouseLeave={handleMouseLeaveNav}
+      >
         <div className={styles.mainNav}>
           <div className={styles.navInner}>
             
@@ -185,355 +214,23 @@ export const Navbar = () => {
               />
             </Link>
 
-            {/* Desktop Center Menu with Mega Dropdowns */}
-            <nav className={styles.desktopMenu} ref={navMenuRef}>
+            {/* Desktop Center Menu */}
+            <nav className={styles.desktopMenu}>
               {APP_CONFIG.navigation.mainMenu.map((item) => {
-                // 1. Venues Mega Dropdown
-                if (item.dropdownType === 'venues') {
-                  const isOpen = activeDropdown === 'venues';
-                  return (
-                    <div 
-                      key={item.label}
-                      className={styles.menuItemWrapper}
-                      onMouseEnter={() => setActiveDropdown('venues')}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <Link 
-                        href={item.href} 
-                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
-                      >
-                        {item.label}
-                      </Link>
-
-                      {isOpen && (
-                        <div className={styles.venuesMegaDropdown}>
-                          <div className={styles.venuesMegaContainer}>
-                            {/* By Type Column */}
-                            <div className={styles.venueColumn}>
-                              <h4 className={styles.venueColumnTitle}>By Type</h4>
-                              <ul className={styles.venueList}>
-                                {APP_CONFIG.navigation.venuesDropdown.byType.map((typeItem) => (
-                                  <li key={typeItem.label}>
-                                    <Link 
-                                      href={typeItem.href} 
-                                      className={`${styles.venueLink} ${typeItem.isBold ? styles.boldLink : ''}`}
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      {typeItem.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* By City Column */}
-                            <div className={styles.venueColumn}>
-                              <h4 className={styles.venueColumnTitle}>By City</h4>
-                              <ul className={styles.venueList}>
-                                {APP_CONFIG.navigation.venuesDropdown.byCity.map((cityItem) => (
-                                  <li key={cityItem.label}>
-                                    <Link 
-                                      href={cityItem.href} 
-                                      className={`${styles.venueLink} ${cityItem.isBold ? styles.boldLink : ''}`}
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      {cityItem.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Temple & Destination Venues (Right Grid) */}
-                            <div className={styles.destinationSection}>
-                              <h4 className={styles.destinationTitle}>
-                                {APP_CONFIG.navigation.venuesDropdown.destinationsTitle || 'Temple & Destination Venues'}
-                              </h4>
-                              <div className={styles.destinationGrid}>
-                                {APP_CONFIG.navigation.venuesDropdown.destinations.map((dest) => (
-                                  <Link 
-                                    key={dest.name} 
-                                    href={dest.href} 
-                                    className={styles.destinationCard}
-                                    onClick={() => setActiveDropdown(null)}
-                                  >
-                                    <div className={styles.destinationImageWrapper}>
-                                      <img 
-                                        src={dest.image} 
-                                        alt={`${dest.name} ${dest.tag || ''}`} 
-                                        className={styles.destinationImage} 
-                                        loading="lazy"
-                                      />
-                                    </div>
-                                    <span className={styles.destinationName}>{dest.name}</span>
-                                    {dest.tag && (
-                                      <span className={styles.destinationTag}>{dest.tag}</span>
-                                    )}
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                // 2. Vendors Mega Dropdown
-                if (item.dropdownType === 'vendors') {
-                  const isOpen = activeDropdown === 'vendors';
-                  return (
-                    <div 
-                      key={item.label}
-                      className={styles.menuItemWrapper}
-                      onMouseEnter={() => setActiveDropdown('vendors')}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <Link 
-                        href={item.href} 
-                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
-                      >
-                        {item.label}
-                      </Link>
-
-                      {isOpen && (
-                        <div className={styles.vendorsMegaDropdown}>
-                          <div className={styles.vendorsMegaContainer}>
-                            {APP_CONFIG.navigation.vendorsDropdown.columns.map((col, colIndex) => (
-                              <div key={colIndex} className={styles.vendorColumn}>
-                                {col.sections.map((section) => (
-                                  <div key={section.title} className={styles.vendorSection}>
-                                    <h4 className={styles.vendorSectionTitle}>{section.title}</h4>
-                                    <ul className={styles.vendorList}>
-                                      {section.items.map((subItem) => (
-                                        <li key={subItem.label}>
-                                          <Link 
-                                            href={subItem.href} 
-                                            className={`${styles.vendorLink} ${subItem.isBold ? styles.boldLink : ''}`}
-                                            onClick={() => setActiveDropdown(null)}
-                                          >
-                                            <span>{subItem.label}</span>
-                                            {subItem.badge && (
-                                              <span className={styles.serviceBadge}>{subItem.badge}</span>
-                                            )}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                // 3. Weddings Mega Dropdown
-                if (item.dropdownType === 'weddings') {
-                  const isOpen = activeDropdown === 'weddings';
-                  return (
-                    <div 
-                      key={item.label}
-                      className={styles.menuItemWrapper}
-                      onMouseEnter={() => setActiveDropdown('weddings')}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <Link 
-                        href={item.href} 
-                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
-                      >
-                        {item.label}
-                      </Link>
-
-                      {isOpen && (
-                        <div className={styles.weddingsMegaDropdown}>
-                          <div className={styles.weddingsMegaContainer}>
-                            {/* Column 1: By City */}
-                            <div className={styles.weddingColumn}>
-                              <h4 className={styles.weddingColumnTitle}>By City</h4>
-                              <ul className={styles.weddingList}>
-                                {APP_CONFIG.navigation.weddingsDropdown.byCity.map((city) => (
-                                  <li key={city.label}>
-                                    <Link 
-                                      href={city.href} 
-                                      className={`${styles.weddingLink} ${city.isBold ? styles.boldLink : ''}`}
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      {city.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Column 2: By Culture */}
-                            <div className={styles.weddingColumn}>
-                              <h4 className={styles.weddingColumnTitle}>By Culture</h4>
-                              <ul className={styles.weddingList}>
-                                {APP_CONFIG.navigation.weddingsDropdown.byCulture.map((culture) => (
-                                  <li key={culture.label}>
-                                    <Link 
-                                      href={culture.href} 
-                                      className={`${styles.weddingLink} ${culture.isBold ? styles.boldLink : ''}`}
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      {culture.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Column 3: By Theme */}
-                            <div className={styles.weddingColumn}>
-                              <h4 className={styles.weddingColumnTitle}>By Theme</h4>
-                              <ul className={styles.weddingList}>
-                                {APP_CONFIG.navigation.weddingsDropdown.byTheme.map((theme) => (
-                                  <li key={theme.label}>
-                                    <Link 
-                                      href={theme.href} 
-                                      className={`${styles.weddingLink} ${theme.isBold ? styles.boldLink : ''}`}
-                                      onClick={() => setActiveDropdown(null)}
-                                    >
-                                      {theme.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            {/* Column 4: Latest Real Weddings */}
-                            <div className={styles.weddingCardsColumn}>
-                              <h4 className={styles.weddingColumnTitle}>
-                                {APP_CONFIG.navigation.weddingsDropdown.latestWeddingsTitle}
-                              </h4>
-                              <div className={styles.weddingCardsList}>
-                                {APP_CONFIG.navigation.weddingsDropdown.latestWeddings.map((wedding) => (
-                                  <Link 
-                                    key={wedding.title} 
-                                    href={wedding.href} 
-                                    className={styles.weddingCard}
-                                    onClick={() => setActiveDropdown(null)}
-                                  >
-                                    <div className={styles.weddingCardImageWrapper}>
-                                      <img 
-                                        src={wedding.image} 
-                                        alt={wedding.title} 
-                                        className={styles.weddingCardImage} 
-                                        loading="lazy"
-                                      />
-                                    </div>
-                                    <span className={styles.weddingCardTitle}>{wedding.title}</span>
-                                  </Link>
-                                ))}
-                              </div>
-                            </div>
-
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                // 4. Photos Mega Dropdown
-                if (item.dropdownType === 'photos') {
-                  const isOpen = activeDropdown === 'photos';
-                  return (
-                    <div 
-                      key={item.label}
-                      className={styles.menuItemWrapper}
-                      onMouseEnter={() => setActiveDropdown('photos')}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <Link 
-                        href={item.href} 
-                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
-                      >
-                        {item.label}
-                      </Link>
-
-                      {isOpen && (
-                        <div className={styles.photosMegaDropdown}>
-                          <div className={styles.photosMegaContainer}>
-                            {APP_CONFIG.navigation.photosDropdown.columns.map((col, colIndex) => (
-                              <div key={colIndex} className={styles.photoColumn}>
-                                {col.sections.map((section) => (
-                                  <div key={section.title} className={styles.photoSection}>
-                                    <h4 className={styles.photoSectionTitle}>{section.title}</h4>
-                                    <ul className={styles.photoList}>
-                                      {section.items.map((subItem) => (
-                                        <li key={subItem.label}>
-                                          <Link 
-                                            href={subItem.href} 
-                                            className={`${styles.photoLink} ${subItem.isBold ? styles.boldLink : ''}`}
-                                            onClick={() => setActiveDropdown(null)}
-                                          >
-                                            {subItem.label}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
-                // 5. E-Invites Dropdown
-                if (item.dropdownType === 'invites') {
-                  const isOpen = activeDropdown === 'invites';
-                  return (
-                    <div 
-                      key={item.label}
-                      className={styles.menuItemWrapper}
-                      onMouseEnter={() => setActiveDropdown('invites')}
-                      onMouseLeave={() => setActiveDropdown(null)}
-                    >
-                      <Link 
-                        href={item.href} 
-                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
-                      >
-                        {item.label}
-                      </Link>
-
-                      {isOpen && (
-                        <div className={styles.invitesDropdown}>
-                          <h4 className={styles.invitesTitle}>
-                            {APP_CONFIG.navigation.invitesDropdown.title}
-                          </h4>
-                          <ul className={styles.invitesList}>
-                            {APP_CONFIG.navigation.invitesDropdown.items.map((subItem) => (
-                              <li key={subItem.label}>
-                                <Link 
-                                  href={subItem.href} 
-                                  className={styles.invitesLink}
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  {subItem.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }
-
+                const isActive = activeDropdown === item.dropdownType;
                 return (
-                  <Link key={item.label} href={item.href} className={styles.navLink}>
-                    {item.label}
-                  </Link>
+                  <div 
+                    key={item.label}
+                    className={styles.menuItemWrapper}
+                    onMouseEnter={() => handleMouseEnterNav(item.dropdownType)}
+                  >
+                    <Link 
+                      href={item.href} 
+                      className={`${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
                 );
               })}
             </nav>
@@ -560,6 +257,321 @@ export const Navbar = () => {
 
           </div>
         </div>
+
+        {/* 3. Single Unified Mega-Menu Dropdown (Myntra-style fixed position & width) */}
+        {activeDropdown && (
+          <div 
+            className={styles.unifiedMegaDropdown}
+            onMouseEnter={handleMouseEnterDropdown}
+            onMouseLeave={handleMouseLeaveNav}
+          >
+            <div className={styles.unifiedMegaInner}>
+              
+              {/* Dropdown 1: Venues */}
+              {activeDropdown === 'venues' && (
+                <div className={styles.venuesGridUnified}>
+                  {/* By Type */}
+                  <div className={styles.unifiedColumn}>
+                    <h4 className={styles.unifiedSectionTitle}>By Type</h4>
+                    <ul className={styles.unifiedList}>
+                      {APP_CONFIG.navigation.venuesDropdown.byType.map((typeItem) => (
+                        <li key={typeItem.label}>
+                          <Link 
+                            href={typeItem.href} 
+                            className={`${styles.unifiedLink} ${typeItem.isBold ? styles.unifiedBoldLink : ''}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {typeItem.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* By City */}
+                  <div className={styles.unifiedColumn}>
+                    <h4 className={styles.unifiedSectionTitle}>By City</h4>
+                    <ul className={styles.unifiedList}>
+                      {APP_CONFIG.navigation.venuesDropdown.byCity.map((cityItem) => (
+                        <li key={cityItem.label}>
+                          <Link 
+                            href={cityItem.href} 
+                            className={`${styles.unifiedLink} ${cityItem.isBold ? styles.unifiedBoldLink : ''}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {cityItem.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Temple & Destination Photo Cards */}
+                  <div className={styles.unifiedDestinationSection}>
+                    <h4 className={styles.unifiedSectionTitle}>
+                      {APP_CONFIG.navigation.venuesDropdown.destinationsTitle || 'Temple & Destination Venues'}
+                    </h4>
+                    <div className={styles.unifiedDestinationGrid}>
+                      {APP_CONFIG.navigation.venuesDropdown.destinations.map((dest) => (
+                        <Link 
+                          key={dest.name} 
+                          href={dest.href} 
+                          className={styles.unifiedDestinationCard}
+                          onClick={() => setActiveDropdown(null)}
+                        >
+                          <div className={styles.unifiedCardImageWrapper}>
+                            <img 
+                              src={dest.image} 
+                              alt={`${dest.name} ${dest.tag || ''}`} 
+                              className={styles.unifiedCardImage} 
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className={styles.unifiedCardTitle}>{dest.name}</span>
+                          {dest.tag && (
+                            <span className={styles.unifiedCardTag}>{dest.tag}</span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Dropdown 2: Vendors */}
+              {activeDropdown === 'vendors' && (
+                <div className={styles.standardFourColumnsGrid}>
+                  {APP_CONFIG.navigation.vendorsDropdown.columns.map((col, colIndex) => (
+                    <div key={colIndex} className={styles.unifiedColumnStacked}>
+                      {col.sections.map((section) => (
+                        <div key={section.title} className={styles.unifiedSubSection}>
+                          <h4 className={styles.unifiedSectionTitle}>{section.title}</h4>
+                          <ul className={styles.unifiedList}>
+                            {section.items.map((subItem) => (
+                              <li key={subItem.label}>
+                                <Link 
+                                  href={subItem.href} 
+                                  className={`${styles.unifiedLink} ${subItem.isBold ? styles.unifiedBoldLink : ''}`}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  <span>{subItem.label}</span>
+                                  {subItem.badge && (
+                                    <span className={styles.unifiedBadge}>{subItem.badge}</span>
+                                  )}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Dropdown 3: Weddings */}
+              {activeDropdown === 'weddings' && (
+                <div className={styles.weddingsGridUnified}>
+                  {/* By City */}
+                  <div className={styles.unifiedColumn}>
+                    <h4 className={styles.unifiedSectionTitle}>By City</h4>
+                    <ul className={styles.unifiedList}>
+                      {APP_CONFIG.navigation.weddingsDropdown.byCity.map((city) => (
+                        <li key={city.label}>
+                          <Link 
+                            href={city.href} 
+                            className={`${styles.unifiedLink} ${city.isBold ? styles.unifiedBoldLink : ''}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {city.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* By Culture */}
+                  <div className={styles.unifiedColumn}>
+                    <h4 className={styles.unifiedSectionTitle}>By Culture</h4>
+                    <ul className={styles.unifiedList}>
+                      {APP_CONFIG.navigation.weddingsDropdown.byCulture.map((culture) => (
+                        <li key={culture.label}>
+                          <Link 
+                            href={culture.href} 
+                            className={`${styles.unifiedLink} ${culture.isBold ? styles.unifiedBoldLink : ''}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {culture.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* By Theme */}
+                  <div className={styles.unifiedColumn}>
+                    <h4 className={styles.unifiedSectionTitle}>By Theme</h4>
+                    <ul className={styles.unifiedList}>
+                      {APP_CONFIG.navigation.weddingsDropdown.byTheme.map((theme) => (
+                        <li key={theme.label}>
+                          <Link 
+                            href={theme.href} 
+                            className={`${styles.unifiedLink} ${theme.isBold ? styles.unifiedBoldLink : ''}`}
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {theme.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Latest Real Weddings */}
+                  <div className={styles.unifiedRealWeddingsSection}>
+                    <h4 className={styles.unifiedSectionTitle}>
+                      {APP_CONFIG.navigation.weddingsDropdown.latestWeddingsTitle}
+                    </h4>
+                    <div className={styles.unifiedWeddingsCardList}>
+                      {APP_CONFIG.navigation.weddingsDropdown.latestWeddings.map((wedding) => (
+                        <Link 
+                          key={wedding.title} 
+                          href={wedding.href} 
+                          className={styles.unifiedWeddingStoryCard}
+                          onClick={() => setActiveDropdown(null)}
+                        >
+                          <div className={styles.unifiedWeddingImageWrapper}>
+                            <img 
+                              src={wedding.image} 
+                              alt={wedding.title} 
+                              className={styles.unifiedCardImage} 
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className={styles.unifiedStoryTitle}>{wedding.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Dropdown 4: Photos */}
+              {activeDropdown === 'photos' && (
+                <div className={styles.standardThreeColumnsGrid}>
+                  {APP_CONFIG.navigation.photosDropdown.columns.map((col, colIndex) => (
+                    <div key={colIndex} className={styles.unifiedColumnStacked}>
+                      {col.sections.map((section) => (
+                        <div key={section.title} className={styles.unifiedSubSection}>
+                          <h4 className={styles.unifiedSectionTitle}>{section.title}</h4>
+                          <ul className={styles.unifiedList}>
+                            {section.items.map((subItem) => (
+                              <li key={subItem.label}>
+                                <Link 
+                                  href={subItem.href} 
+                                  className={`${styles.unifiedLink} ${subItem.isBold ? styles.unifiedBoldLink : ''}`}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {subItem.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Dropdown 5: E-Invites */}
+              {activeDropdown === 'invites' && (
+                <div className={styles.standardFourColumnsGrid}>
+                  {APP_CONFIG.navigation.invitesDropdown.columns.map((col, colIndex) => (
+                    <div key={colIndex} className={styles.unifiedColumnStacked}>
+                      {col.sections.map((section) => (
+                        <div key={section.title} className={styles.unifiedSubSection}>
+                          <h4 className={styles.unifiedSectionTitle}>{section.title}</h4>
+                          <ul className={styles.unifiedList}>
+                            {section.items.map((subItem) => (
+                              <li key={subItem.label}>
+                                <Link 
+                                  href={subItem.href} 
+                                  className={`${styles.unifiedLink} ${subItem.isBold ? styles.unifiedBoldLink : ''}`}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  <span>{subItem.label}</span>
+                                  {subItem.badge && (
+                                    <span className={styles.unifiedBadge}>{subItem.badge}</span>
+                                  )}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Dropdown 6: Blog */}
+              {activeDropdown === 'blog' && (
+                <div className={styles.standardFourColumnsGrid}>
+                  {APP_CONFIG.navigation.blogDropdown.columns.map((col, colIndex) => (
+                    <div key={colIndex} className={styles.unifiedColumnStacked}>
+                      {col.sections.map((section) => (
+                        <div key={section.title} className={styles.unifiedSubSection}>
+                          <h4 className={styles.unifiedSectionTitle}>{section.title}</h4>
+                          <ul className={styles.unifiedList}>
+                            {section.items.map((subItem) => (
+                              <li key={subItem.label}>
+                                <Link 
+                                  href={subItem.href} 
+                                  className={`${styles.unifiedLink} ${subItem.isBold ? styles.unifiedBoldLink : ''}`}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {subItem.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Dropdown 7: Genie */}
+              {activeDropdown === 'genie' && (
+                <div className={styles.genieUnifiedContainer}>
+                  <div className={styles.genieHeaderBlock}>
+                    <h3 className={styles.genieMainTitle}>{APP_CONFIG.navigation.genieDropdown.title}</h3>
+                    <p className={styles.genieSubTitle}>{APP_CONFIG.navigation.genieDropdown.subtitle}</p>
+                  </div>
+                  <div className={styles.genieCardsGrid}>
+                    {APP_CONFIG.navigation.genieDropdown.services.map((service) => (
+                      <Link 
+                        key={service.title} 
+                        href={service.href} 
+                        className={styles.genieServiceCard}
+                        onClick={() => setActiveDropdown(null)}
+                      >
+                        <div className={styles.genieCardTop}>
+                          <span className={styles.genieCardTitle}>{service.title}</span>
+                          <span className={styles.unifiedBadge}>{service.badge}</span>
+                        </div>
+                        <p className={styles.genieCardDesc}>{service.desc}</p>
+                        <span className={styles.genieCardCta}>Explore Concierge →</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+        )}
 
         {/* Mobile Menu Overlay */}
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>

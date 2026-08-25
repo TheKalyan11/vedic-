@@ -618,238 +618,114 @@
   color: var(--color-primary, #D35400) !important;
 }
 
-/* =========================================================
-   Venues Mega Dropdown
-   ========================================================= */
-.menuItemWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.navLinkActive {
-  color: var(--color-primary, #D35400) !important;
-}
-
 .navLinkActive::after {
   width: 100% !important;
 }
 
-.venuesMegaDropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-35%);
-  width: 900px;
-  max-width: calc(100vw - 32px);
-  background: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 20px 24px;
-  z-index: 2000;
-  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Invisible hover bridge to prevent premature closing */
-.venuesMegaDropdown::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
-}
-
-.venuesMegaContainer {
-  display: grid;
-  grid-template-columns: 210px 130px 1fr;
-  gap: 24px;
-}
-
-.venueColumn {
-  display: flex;
-  flex-direction: column;
-}
-
-.venueColumnTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-primary, #D35400);
-  margin-bottom: 10px;
-  font-family: inherit;
-  letter-spacing: 0.2px;
-}
-
-.venueList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0;
-  margin: 0;
-}
-
-.venueLink {
-  font-size: 0.94rem;
-  color: #4A4A4A;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  display: inline-block;
-  line-height: 1.35;
-}
-
-.venueLink:hover {
-  color: var(--color-primary, #D35400);
-  transform: translateX(2px);
-}
-
-.boldLink {
-  font-weight: 700;
-  color: #1A1A1A;
-  margin-top: 3px;
-  display: inline-block;
-  font-size: 0.94rem;
-}
-
-.boldLink:hover {
-  color: var(--color-primary, #D35400);
-}
-
-/* Destination Wedding Venues Section */
-.destinationSection {
-  display: flex;
-  flex-direction: column;
-}
-
-.destinationTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #2C3E50;
-  margin-bottom: 10px;
-  font-family: inherit;
-  letter-spacing: 0.2px;
-}
-
-.destinationGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px 10px;
-}
-
-.destinationCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  transition: transform 0.25s ease;
-}
-
-.destinationCard:hover {
-  transform: translateY(-2px);
-}
-
-.destinationImageWrapper {
-  width: 100%;
-  height: 78px;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 5px;
-  background-color: #F5F5F5;
-}
-
-.destinationImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-  display: block;
-}
-
-.destinationCard:hover .destinationImage {
-  transform: scale(1.06);
-}
-
-.destinationName {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #2C3E50;
-  text-align: center;
-  line-height: 1.2;
-}
-
-.destinationTag {
-  font-size: 0.82rem;
-  color: var(--color-primary, #D35400);
-  text-align: center;
-  font-weight: 500;
-  margin-top: 2px;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.destinationCard:hover .destinationName {
-  color: var(--color-primary, #D35400);
-}
-
 /* =========================================================
-   Vendors Mega Dropdown
+   Unified Mega-Menu Dropdown (Myntra-style fixed container)
    ========================================================= */
-.vendorsMegaDropdown {
+@keyframes unifiedDropdownFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.unifiedMegaDropdown {
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: 50%;
-  transform: translateX(-40%);
-  width: 940px;
-  max-width: calc(100vw - 32px);
+  transform: translateX(-50%);
+  width: 1140px;
+  max-width: calc(100vw - 40px);
   background: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 20px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 24px 32px;
   z-index: 2000;
-  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: unifiedDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Invisible hover bridge to prevent premature closing */
-.vendorsMegaDropdown::before {
+.unifiedMegaDropdown::before {
   content: '';
   position: absolute;
-  top: -12px;
+  top: -16px;
   left: 0;
   right: 0;
-  height: 12px;
+  height: 16px;
 }
 
-.vendorsMegaContainer {
+.unifiedMegaInner {
+  width: 100%;
+  min-height: 290px;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Grids */
+.venuesGridUnified {
+  display: grid;
+  grid-template-columns: 210px 140px 1fr;
+  gap: 32px;
+  width: 100%;
+}
+
+.standardFourColumnsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  gap: 28px;
+  width: 100%;
 }
 
-.vendorColumn {
+.weddingsGridUnified {
+  display: grid;
+  grid-template-columns: 140px 165px 185px 1fr;
+  gap: 28px;
+  width: 100%;
+}
+
+.standardThreeColumnsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+/* Column & Section Types */
+.unifiedColumn {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
 
-.vendorSection {
+.unifiedColumnStacked {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.unifiedSubSection {
   display: flex;
   flex-direction: column;
 }
 
-.vendorSectionTitle {
+.unifiedSectionTitle {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary, #D35400);
-  margin-bottom: 7px;
+  margin-bottom: 10px;
   font-family: inherit;
   letter-spacing: 0.2px;
 }
 
-.vendorList {
+.unifiedList {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -858,7 +734,7 @@
   margin: 0;
 }
 
-.vendorLink {
+.unifiedLink {
   font-size: 0.94rem;
   color: #4A4A4A;
   text-decoration: none;
@@ -866,16 +742,28 @@
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
   line-height: 1.35;
 }
 
-.vendorLink:hover {
+.unifiedLink:hover {
   color: var(--color-primary, #D35400);
   transform: translateX(2px);
 }
 
-.serviceBadge {
+.unifiedBoldLink {
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-top: 3px;
+  display: inline-block;
+  font-size: 0.94rem;
+}
+
+.unifiedBoldLink:hover {
+  color: var(--color-primary, #D35400);
+}
+
+.unifiedBadge {
   font-size: 0.68rem;
   font-weight: 700;
   color: #27AE60;
@@ -888,102 +776,98 @@
   white-space: nowrap;
 }
 
-/* =========================================================
-   Weddings Mega Dropdown
-   ========================================================= */
-.weddingsMegaDropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-48%);
-  width: 920px;
-  max-width: calc(100vw - 32px);
-  background: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 20px 24px;
-  z-index: 2000;
-  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Temple Destination Cards (Venues) */
+.unifiedDestinationSection {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Invisible hover bridge to prevent premature closing */
-.weddingsMegaDropdown::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
-}
-
-.weddingsMegaContainer {
+.unifiedDestinationGrid {
   display: grid;
-  grid-template-columns: 140px 165px 185px 1fr;
-  gap: 22px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 10px;
 }
 
-.weddingColumn {
+.unifiedDestinationCard {
   display: flex;
   flex-direction: column;
-}
-
-.weddingColumnTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-primary, #D35400);
-  margin-bottom: 10px;
-  font-family: inherit;
-  letter-spacing: 0.2px;
-}
-
-.weddingList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0;
-  margin: 0;
-}
-
-.weddingLink {
-  font-size: 0.94rem;
-  color: #4A4A4A;
+  align-items: center;
   text-decoration: none;
-  transition: all 0.2s ease;
-  display: inline-block;
-  line-height: 1.35;
+  transition: transform 0.25s ease;
 }
 
-.weddingLink:hover {
+.unifiedDestinationCard:hover {
+  transform: translateY(-2px);
+}
+
+.unifiedCardImageWrapper {
+  width: 100%;
+  height: 78px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  background-color: #F5F5F5;
+}
+
+.unifiedCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.unifiedDestinationCard:hover .unifiedCardImage {
+  transform: scale(1.06);
+}
+
+.unifiedCardTitle {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #2C3E50;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.unifiedCardTag {
+  font-size: 0.82rem;
   color: var(--color-primary, #D35400);
-  transform: translateX(2px);
+  text-align: center;
+  font-weight: 500;
+  margin-top: 2px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-/* Column 4: Latest Real Weddings */
-.weddingCardsColumn {
+.unifiedDestinationCard:hover .unifiedCardTitle {
+  color: var(--color-primary, #D35400);
+}
+
+/* Latest Real Weddings (Weddings) */
+.unifiedRealWeddingsSection {
   display: flex;
   flex-direction: column;
 }
 
-.weddingCardsList {
+.unifiedWeddingsCardList {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.weddingCard {
+.unifiedWeddingStoryCard {
   display: flex;
   flex-direction: column;
   text-decoration: none;
   transition: transform 0.25s ease;
 }
 
-.weddingCard:hover {
+.unifiedWeddingStoryCard:hover {
   transform: translateY(-2px);
 }
 
-.weddingCardImageWrapper {
+.unifiedWeddingImageWrapper {
   width: 100%;
   height: 80px;
   border-radius: 6px;
@@ -993,19 +877,11 @@
   background-color: #F5F5F5;
 }
 
-.weddingCardImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s ease;
-  display: block;
-}
-
-.weddingCard:hover .weddingCardImage {
+.unifiedWeddingStoryCard:hover .unifiedCardImage {
   transform: scale(1.06);
 }
 
-.weddingCardTitle {
+.unifiedStoryTitle {
   font-size: 0.9rem;
   font-weight: 500;
   color: #2C3E50;
@@ -1015,148 +891,95 @@
   white-space: nowrap;
 }
 
-.weddingCard:hover .weddingCardTitle {
+.unifiedWeddingStoryCard:hover .unifiedStoryTitle {
   color: var(--color-primary, #D35400);
   font-weight: 600;
 }
 
-/* =========================================================
-   Photos Mega Dropdown
-   ========================================================= */
-.photosMegaDropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-52%);
-  width: 820px;
-  max-width: calc(100vw - 32px);
-  background: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 20px 24px;
-  z-index: 2000;
-  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Genie Service Cards */
+.genieUnifiedContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 }
 
-/* Invisible hover bridge to prevent premature closing */
-.photosMegaDropdown::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
+.genieHeaderBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 12px;
 }
 
-.photosMegaContainer {
+.genieMainTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary, #D35400);
+  margin: 0;
+}
+
+.genieSubTitle {
+  font-size: 0.92rem;
+  color: #666666;
+  margin: 0;
+}
+
+.genieCardsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
-.photoColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.photoSection {
-  display: flex;
-  flex-direction: column;
-}
-
-.photoSectionTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-primary, #D35400);
-  margin-bottom: 7px;
-  font-family: inherit;
-  letter-spacing: 0.2px;
-}
-
-.photoList {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0;
-  margin: 0;
-}
-
-.photoLink {
-  font-size: 0.94rem;
-  color: #4A4A4A;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  display: inline-block;
-  line-height: 1.35;
-}
-
-.photoLink:hover {
-  color: var(--color-primary, #D35400);
-  transform: translateX(2px);
-}
-
-/* =========================================================
-   E-Invites Dropdown
-   ========================================================= */
-.invitesDropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 270px;
-  background: #FFFFFF;
+.genieServiceCard {
+  background: #FAFAFA;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 8px;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 18px 20px;
-  z-index: 2000;
-  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Invisible hover bridge to prevent premature closing */
-.invitesDropdown::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 0;
-  right: 0;
-  height: 12px;
-}
-
-.invitesTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--color-primary, #D35400);
-  margin-bottom: 12px;
-  font-family: inherit;
-  letter-spacing: 0.2px;
-}
-
-.invitesList {
-  list-style: none;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0;
-  margin: 0;
-}
-
-.invitesLink {
-  font-size: 0.94rem;
-  color: #4A4A4A;
+  justify-content: space-between;
   text-decoration: none;
-  transition: all 0.2s ease;
-  display: inline-block;
-  line-height: 1.35;
+  transition: all 0.25s ease;
+  min-height: 155px;
 }
 
-.invitesLink:hover {
-  color: var(--color-primary, #D35400);
-  transform: translateX(2px);
+.genieServiceCard:hover {
+  background: #FFFFFF;
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 20px rgba(211, 84, 0, 0.08);
+  transform: translateY(-3px);
 }
+
+.genieCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.genieCardTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1.3;
+}
+
+.genieCardDesc {
+  font-size: 0.86rem;
+  color: #555555;
+  line-height: 1.35;
+  margin: 0 0 12px 0;
+}
+
+.genieCardCta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary, #D35400);
+  margin-top: auto;
+}
+
 
 
 
