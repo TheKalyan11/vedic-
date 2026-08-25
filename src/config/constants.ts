@@ -41,6 +41,7 @@ export const APP_CONFIG = {
         }
       ],
       actions: [
+        { label: 'Vedic Marriage', href: 'https://www.vedicmarriage.com/', icon: 'external', isExternal: true },
         { label: 'Write A Review', href: '/review', icon: 'review' },
         { label: 'Download App', href: '/app', icon: 'app' },
       ]

@@ -160,35 +160,64 @@ export const Navbar = () => {
                 <Link 
                   href={action.href} 
                   className={`${styles.topBarLink} ${action.icon === 'app' ? styles.appLink : styles.reviewLink}`}
+                  target={action.isExternal ? '_blank' : undefined}
+                  rel={action.isExternal ? 'noopener noreferrer' : undefined}
                 >
+                  {/* External Website Icon */}
+                  {action.icon === 'external' && (
+                    <svg 
+                      viewBox="0 0 24 24" 
+                      className={styles.actionIcon} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2.2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                  )}
+
+                  {/* Write A Review Icon (Document with text lines and pencil at bottom-right) */}
                   {action.icon === 'review' && (
                     <svg 
                       viewBox="0 0 24 24" 
                       className={styles.actionIcon} 
                       fill="none" 
                       stroke="currentColor" 
-                      strokeWidth="2" 
+                      strokeWidth="2.2" 
                       strokeLinecap="round" 
                       strokeLinejoin="round"
                     >
-                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h7"></path>
+                      <line x1="8" y1="7" x2="16" y2="7"></line>
+                      <line x1="8" y1="11" x2="14" y2="11"></line>
+                      <line x1="8" y1="15" x2="11" y2="15"></line>
+                      <path d="M16 19l4-4 1.5 1.5-4 4H16v-1.5z"></path>
+                      <path d="M18.5 13.5l2 2"></path>
                     </svg>
                   )}
+
+                  {/* Download App Icon (Smartphone with download arrow and home dot) */}
                   {action.icon === 'app' && (
                     <svg 
                       viewBox="0 0 24 24" 
                       className={`${styles.actionIcon} ${styles.appIcon}`} 
                       fill="none" 
                       stroke="currentColor" 
-                      strokeWidth="2" 
+                      strokeWidth="2.2" 
                       strokeLinecap="round" 
                       strokeLinejoin="round"
                     >
-                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                      <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                      <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                      <line x1="12" y1="7" x2="12" y2="13"></line>
+                      <polyline points="9 10 12 13 15 10"></polyline>
+                      <circle cx="12" cy="18" r="0.75" fill="currentColor"></circle>
                     </svg>
                   )}
+
                   <span className={styles.actionText}>{action.label}</span>
                 </Link>
               </React.Fragment>
