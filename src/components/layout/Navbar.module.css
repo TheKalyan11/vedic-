@@ -141,12 +141,12 @@
 
 .locationSearchInput {
   width: 100%;
-  height: 42px;
+  height: 44px;
   background-color: #FAFAFA;
   border: 1px solid #E5E5E5;
   border-radius: 6px;
-  padding: 0 14px 0 40px;
-  font-size: 0.95rem;
+  padding: 0 14px 0 42px;
+  font-size: 1rem;
   color: #1A1A1A;
   font-family: inherit;
   outline: none;
@@ -162,8 +162,8 @@
 .locationGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  max-height: 420px;
+  gap: 24px;
+  max-height: 440px;
   overflow-y: auto;
 }
 
@@ -173,7 +173,7 @@
 }
 
 .columnTitle {
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary, #D35400);
   margin-bottom: 12px;
@@ -186,7 +186,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 8px;
   padding: 0;
   margin: 0;
 }
@@ -194,11 +194,11 @@
 .cityItem {
   background: none;
   border: none;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: #4A4A4A;
   text-align: left;
   cursor: pointer;
-  padding: 3px 6px;
+  padding: 4px 8px;
   border-radius: 4px;
   transition: all 0.2s ease;
   font-family: inherit;
@@ -641,13 +641,13 @@
   top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-35%);
-  width: 860px;
+  width: 900px;
   max-width: calc(100vw - 32px);
   background: #FFFFFF;
   border-radius: 8px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 18px 22px;
+  padding: 20px 24px;
   z-index: 2000;
   animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -664,8 +664,8 @@
 
 .venuesMegaContainer {
   display: grid;
-  grid-template-columns: 190px 115px 1fr;
-  gap: 22px;
+  grid-template-columns: 210px 130px 1fr;
+  gap: 24px;
 }
 
 .venueColumn {
@@ -674,10 +674,10 @@
 }
 
 .venueColumnTitle {
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary, #D35400);
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   font-family: inherit;
   letter-spacing: 0.2px;
 }
@@ -692,7 +692,7 @@
 }
 
 .venueLink {
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   color: #4A4A4A;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -710,7 +710,7 @@
   color: #1A1A1A;
   margin-top: 3px;
   display: inline-block;
-  font-size: 0.88rem;
+  font-size: 0.94rem;
 }
 
 .boldLink:hover {
@@ -724,10 +724,10 @@
 }
 
 .destinationTitle {
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #2C3E50;
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   font-family: inherit;
   letter-spacing: 0.2px;
 }
@@ -752,11 +752,11 @@
 
 .destinationImageWrapper {
   width: 100%;
-  height: 72px;
+  height: 78px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   background-color: #F5F5F5;
 }
 
@@ -773,7 +773,7 @@
 }
 
 .destinationName {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: #2C3E50;
   text-align: center;
@@ -781,11 +781,11 @@
 }
 
 .destinationTag {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--color-primary, #D35400);
   text-align: center;
   font-weight: 500;
-  margin-top: 1px;
+  margin-top: 2px;
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -802,13 +802,13 @@
   top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-40%);
-  width: 880px;
+  width: 940px;
   max-width: calc(100vw - 32px);
   background: #FFFFFF;
   border-radius: 8px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 18px 22px;
+  padding: 20px 24px;
   z-index: 2000;
   animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -826,13 +826,13 @@
 .vendorsMegaContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  gap: 20px;
 }
 
 .vendorColumn {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
 .vendorSection {
@@ -841,10 +841,10 @@
 }
 
 .vendorSectionTitle {
-  font-size: 0.96rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary, #D35400);
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   font-family: inherit;
   letter-spacing: 0.2px;
 }
@@ -853,13 +853,13 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   padding: 0;
   margin: 0;
 }
 
 .vendorLink {
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   color: #4A4A4A;
   text-decoration: none;
   display: flex;
@@ -876,7 +876,7 @@
 }
 
 .serviceBadge {
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #27AE60;
   border: 1px solid #27AE60;
@@ -896,13 +896,13 @@
   top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-48%);
-  width: 860px;
+  width: 920px;
   max-width: calc(100vw - 32px);
   background: #FFFFFF;
   border-radius: 8px;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 18px 22px;
+  padding: 20px 24px;
   z-index: 2000;
   animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -919,8 +919,8 @@
 
 .weddingsMegaContainer {
   display: grid;
-  grid-template-columns: 130px 150px 170px 1fr;
-  gap: 20px;
+  grid-template-columns: 140px 165px 185px 1fr;
+  gap: 22px;
 }
 
 .weddingColumn {
@@ -929,10 +929,10 @@
 }
 
 .weddingColumnTitle {
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-primary, #D35400);
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   font-family: inherit;
   letter-spacing: 0.2px;
 }
@@ -947,7 +947,7 @@
 }
 
 .weddingLink {
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   color: #4A4A4A;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -985,7 +985,7 @@
 
 .weddingCardImageWrapper {
   width: 100%;
-  height: 74px;
+  height: 80px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -1006,7 +1006,7 @@
 }
 
 .weddingCardTitle {
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #2C3E50;
   line-height: 1.25;
