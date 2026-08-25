@@ -1,0 +1,224 @@
+.categoriesSection {
+  padding: 3.5rem 0 4.5rem 0;
+  background-color: #FFFFFF;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.25rem;
+}
+
+.sectionBadge {
+  color: var(--color-primary, #D35400);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.title {
+  font-family: var(--font-outfit);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.35rem 0;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-outfit);
+  font-size: 0.95rem;
+  color: #6B7280;
+  margin: 0;
+  max-width: 620px;
+}
+
+.viewAllLink {
+  font-family: var(--font-outfit);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary, #D35400);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.viewAllLink:hover {
+  transform: translateX(3px);
+  color: #A04000;
+}
+
+/* 5-Column Desktop Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+/* Category Card */
+.categoryCard {
+  position: relative;
+  height: 240px;
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+  background-color: #F1F5F9;
+}
+
+.categoryCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+  border-color: rgba(211, 84, 0, 0.3);
+}
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.categoryCard:hover .bgImage {
+  transform: scale(1.08);
+}
+
+/* Gradient Overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.45) 45%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.categoryCard:hover .overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+/* Floating Icon Top Badge */
+.iconBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary, #D35400);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.categoryCard:hover .iconBadge {
+  transform: scale(1.1);
+  background: var(--color-primary, #D35400);
+  color: #FFFFFF;
+}
+
+.iconBadge svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Card Content */
+.content {
+  position: relative;
+  z-index: 3;
+  color: #FFFFFF;
+}
+
+.categoryTitle {
+  font-family: var(--font-outfit);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 2px 0;
+  line-height: 1.25;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.countText {
+  font-family: var(--font-outfit);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .categoriesSection {
+    padding: 2.5rem 0 3.5rem 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .categoryCard {
+    height: 190px;
+    padding: 1rem 0.85rem;
+  }
+
+  .categoryTitle {
+    font-size: 1.05rem;
+  }
+
+  .countText {
+    font-size: 0.78rem;
+  }
+}

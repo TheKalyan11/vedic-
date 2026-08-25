@@ -5,6 +5,7 @@ import { Hero } from '../components/home/Hero';
 import { ScrollingBanner } from '../components/home/ScrollingBanner';
 import { VenuesByCity } from '../components/home/VenuesByCity';
 import { PopularVendors } from '../components/home/PopularVendors';
+import { WeddingCategories } from '../components/home/WeddingCategories';
 import Link from 'next/link';
 import styles from './page.module.css';
 
@@ -46,6 +47,9 @@ export default async function Home() {
 
       {/* Popular Vendors Section */}
       <PopularVendors />
+
+      {/* Wedding Categories Section */}
+      <WeddingCategories />
 
       {/* Philosophy / Value Proposition */}
       <section className={`${styles.section} ${styles.philosophySection}`}>
