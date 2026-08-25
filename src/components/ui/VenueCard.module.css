@@ -115,8 +115,18 @@
   font-weight: 700;
   color: #D35400;
   background: #FFF5EC;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.starIconSvg {
+  width: 13px;
+  height: 13px;
+  color: #D35400;
+  flex-shrink: 0;
 }
 
 /* Address */

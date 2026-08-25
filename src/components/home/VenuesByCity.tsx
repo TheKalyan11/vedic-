@@ -159,8 +159,8 @@ export const VenuesByCity = () => {
         <div className={styles.header}>
           <div>
             <span className={styles.sectionBadge}>POPULAR DESTINATIONS</span>
-            <h2 className={styles.title}>Wedding Venues by City</h2>
-            <p className={styles.subtitle}>Explore curated sacred spaces and celebration halls across top Indian cities</p>
+            <h2 className={styles.title}>Venues by City</h2>
+            <p className={styles.subtitle}>Explore banquet halls, marriage lawns, resorts, mandapams, and celebration spaces across top Indian cities</p>
           </div>
           
           <div className={styles.navButtons}>

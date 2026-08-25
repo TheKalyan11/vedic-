@@ -47,7 +47,7 @@ export default async function VenuesPage() {
           </div>
           
           <div className={styles.resultsCount}>
-            Showing {venues.length} properties
+            Showing {venues.length} curated venues
           </div>
         </div>
 
