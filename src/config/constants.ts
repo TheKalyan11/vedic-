@@ -50,8 +50,8 @@ export const APP_CONFIG = {
       { label: 'Vendors', href: '/vendors', dropdownType: 'vendors' },
       { label: 'Weddings', href: '/real-weddings', dropdownType: 'weddings' },
       { label: 'Photos', href: '/photos', dropdownType: 'photos' },
-      { label: 'Blog', href: '/blog' },
       { label: 'E-Invites', href: '/invites' },
+      { label: 'Blog', href: '/blog' },
       { label: 'Genie', href: '/genie' },
     ],
     venuesDropdown: {
