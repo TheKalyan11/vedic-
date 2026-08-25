@@ -48,7 +48,7 @@ export const APP_CONFIG = {
     mainMenu: [
       { label: 'Venues', href: '/venues', dropdownType: 'venues' },
       { label: 'Vendors', href: '/vendors', dropdownType: 'vendors' },
-      { label: 'Weddings', href: '/real-weddings' },
+      { label: 'Weddings', href: '/real-weddings', dropdownType: 'weddings' },
       { label: 'Photos', href: '/photos' },
       { label: 'Blog', href: '/blog' },
       { label: 'E-Invites', href: '/invites' },
@@ -245,6 +245,47 @@ export const APP_CONFIG = {
               ]
             }
           ]
+        }
+      ]
+    },
+    weddingsDropdown: {
+      byCity: [
+        { label: 'Mumbai', href: '/real-weddings?city=Mumbai' },
+        { label: 'Bangalore', href: '/real-weddings?city=Bangalore' },
+        { label: 'Pune', href: '/real-weddings?city=Pune' },
+        { label: 'Kolkata', href: '/real-weddings?city=Kolkata' },
+        { label: 'Jaipur', href: '/real-weddings?city=Jaipur' },
+        { label: 'Others', href: '/real-weddings', isBold: true },
+      ],
+      byCulture: [
+        { label: 'Maharashtrian', href: '/real-weddings?culture=Maharashtrian' },
+        { label: 'Punjabi / Sikh', href: '/real-weddings?culture=Punjabi-Sikh' },
+        { label: 'Bengali', href: '/real-weddings?culture=Bengali' },
+        { label: 'Gujarati', href: '/real-weddings?culture=Gujarati' },
+        { label: 'Marwari', href: '/real-weddings?culture=Marwari' },
+        { label: 'Telugu', href: '/real-weddings?culture=Telugu' },
+        { label: 'Others', href: '/real-weddings', isBold: true },
+      ],
+      byTheme: [
+        { label: 'Destination', href: '/real-weddings?theme=Destination' },
+        { label: 'Grand & Luxurious', href: '/real-weddings?theme=Grand-Luxurious' },
+        { label: 'Pocket Friendly Stunners', href: '/real-weddings?theme=Pocket-Friendly' },
+        { label: 'Intimate & Minimalist', href: '/real-weddings?theme=Intimate-Minimalist' },
+        { label: 'Modern & Stylish', href: '/real-weddings?theme=Modern-Stylish' },
+        { label: 'International', href: '/real-weddings?theme=International' },
+        { label: 'Others', href: '/real-weddings', isBold: true },
+      ],
+      latestWeddingsTitle: 'Latest Real Weddings',
+      latestWeddings: [
+        {
+          title: 'Nireeksha and Dhananjay (Bangalore)',
+          image: '/weddings/wedding1.jpg',
+          href: '/real-weddings/nireeksha-dhananjay'
+        },
+        {
+          title: 'Deepshikha and Saiteej (Delhi NCR)',
+          image: '/weddings/wedding2.jpg',
+          href: '/real-weddings/deepshikha-saiteej'
         }
       ]
     }

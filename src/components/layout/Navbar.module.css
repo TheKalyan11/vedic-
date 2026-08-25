@@ -888,4 +888,136 @@
   white-space: nowrap;
 }
 
+/* =========================================================
+   Weddings Mega Dropdown
+   ========================================================= */
+.weddingsMegaDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-48%);
+  width: 860px;
+  max-width: calc(100vw - 32px);
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 18px 22px;
+  z-index: 2000;
+  animation: dropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Invisible hover bridge to prevent premature closing */
+.weddingsMegaDropdown::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
+}
+
+.weddingsMegaContainer {
+  display: grid;
+  grid-template-columns: 130px 150px 170px 1fr;
+  gap: 20px;
+}
+
+.weddingColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.weddingColumnTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-primary, #D35400);
+  margin-bottom: 9px;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.weddingList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+}
+
+.weddingLink {
+  font-size: 0.88rem;
+  color: #4A4A4A;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+  line-height: 1.35;
+}
+
+.weddingLink:hover {
+  color: var(--color-primary, #D35400);
+  transform: translateX(2px);
+}
+
+/* Column 4: Latest Real Weddings */
+.weddingCardsColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.weddingCardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weddingCard {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.weddingCard:hover {
+  transform: translateY(-2px);
+}
+
+.weddingCardImageWrapper {
+  width: 100%;
+  height: 74px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  background-color: #F5F5F5;
+}
+
+.weddingCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.weddingCard:hover .weddingCardImage {
+  transform: scale(1.06);
+}
+
+.weddingCardTitle {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #2C3E50;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.weddingCard:hover .weddingCardTitle {
+  color: var(--color-primary, #D35400);
+  font-weight: 600;
+}
+
 

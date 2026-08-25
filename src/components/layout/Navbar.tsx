@@ -188,7 +188,7 @@ export const Navbar = () => {
             {/* Desktop Center Menu with Mega Dropdowns */}
             <nav className={styles.desktopMenu} ref={navMenuRef}>
               {APP_CONFIG.navigation.mainMenu.map((item) => {
-                // Venues Mega Dropdown
+                // 1. Venues Mega Dropdown
                 if (item.dropdownType === 'venues') {
                   const isOpen = activeDropdown === 'venues';
                   return (
@@ -208,7 +208,7 @@ export const Navbar = () => {
                       {isOpen && (
                         <div className={styles.venuesMegaDropdown}>
                           <div className={styles.venuesMegaContainer}>
-                            {/* 1. By Type Column */}
+                            {/* By Type Column */}
                             <div className={styles.venueColumn}>
                               <h4 className={styles.venueColumnTitle}>By Type</h4>
                               <ul className={styles.venueList}>
@@ -226,7 +226,7 @@ export const Navbar = () => {
                               </ul>
                             </div>
 
-                            {/* 2. By City Column */}
+                            {/* By City Column */}
                             <div className={styles.venueColumn}>
                               <h4 className={styles.venueColumnTitle}>By City</h4>
                               <ul className={styles.venueList}>
@@ -244,7 +244,7 @@ export const Navbar = () => {
                               </ul>
                             </div>
 
-                            {/* 3. Temple & Destination Venues (Right Grid) */}
+                            {/* Temple & Destination Venues (Right Grid) */}
                             <div className={styles.destinationSection}>
                               <h4 className={styles.destinationTitle}>
                                 {APP_CONFIG.navigation.venuesDropdown.destinationsTitle || 'Temple & Destination Venues'}
@@ -280,7 +280,7 @@ export const Navbar = () => {
                   );
                 }
 
-                // Vendors Mega Dropdown
+                // 2. Vendors Mega Dropdown
                 if (item.dropdownType === 'vendors') {
                   const isOpen = activeDropdown === 'vendors';
                   return (
@@ -325,6 +325,114 @@ export const Navbar = () => {
                                 ))}
                               </div>
                             ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                // 3. Weddings Mega Dropdown
+                if (item.dropdownType === 'weddings') {
+                  const isOpen = activeDropdown === 'weddings';
+                  return (
+                    <div 
+                      key={item.label}
+                      className={styles.menuItemWrapper}
+                      onMouseEnter={() => setActiveDropdown('weddings')}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <Link 
+                        href={item.href} 
+                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
+                      >
+                        {item.label}
+                      </Link>
+
+                      {isOpen && (
+                        <div className={styles.weddingsMegaDropdown}>
+                          <div className={styles.weddingsMegaContainer}>
+                            {/* Column 1: By City */}
+                            <div className={styles.weddingColumn}>
+                              <h4 className={styles.weddingColumnTitle}>By City</h4>
+                              <ul className={styles.weddingList}>
+                                {APP_CONFIG.navigation.weddingsDropdown.byCity.map((city) => (
+                                  <li key={city.label}>
+                                    <Link 
+                                      href={city.href} 
+                                      className={`${styles.weddingLink} ${city.isBold ? styles.boldLink : ''}`}
+                                      onClick={() => setActiveDropdown(null)}
+                                    >
+                                      {city.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {/* Column 2: By Culture */}
+                            <div className={styles.weddingColumn}>
+                              <h4 className={styles.weddingColumnTitle}>By Culture</h4>
+                              <ul className={styles.weddingList}>
+                                {APP_CONFIG.navigation.weddingsDropdown.byCulture.map((culture) => (
+                                  <li key={culture.label}>
+                                    <Link 
+                                      href={culture.href} 
+                                      className={`${styles.weddingLink} ${culture.isBold ? styles.boldLink : ''}`}
+                                      onClick={() => setActiveDropdown(null)}
+                                    >
+                                      {culture.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {/* Column 3: By Theme */}
+                            <div className={styles.weddingColumn}>
+                              <h4 className={styles.weddingColumnTitle}>By Theme</h4>
+                              <ul className={styles.weddingList}>
+                                {APP_CONFIG.navigation.weddingsDropdown.byTheme.map((theme) => (
+                                  <li key={theme.label}>
+                                    <Link 
+                                      href={theme.href} 
+                                      className={`${styles.weddingLink} ${theme.isBold ? styles.boldLink : ''}`}
+                                      onClick={() => setActiveDropdown(null)}
+                                    >
+                                      {theme.label}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {/* Column 4: Latest Real Weddings */}
+                            <div className={styles.weddingCardsColumn}>
+                              <h4 className={styles.weddingColumnTitle}>
+                                {APP_CONFIG.navigation.weddingsDropdown.latestWeddingsTitle}
+                              </h4>
+                              <div className={styles.weddingCardsList}>
+                                {APP_CONFIG.navigation.weddingsDropdown.latestWeddings.map((wedding) => (
+                                  <Link 
+                                    key={wedding.title} 
+                                    href={wedding.href} 
+                                    className={styles.weddingCard}
+                                    onClick={() => setActiveDropdown(null)}
+                                  >
+                                    <div className={styles.weddingCardImageWrapper}>
+                                      <img 
+                                        src={wedding.image} 
+                                        alt={wedding.title} 
+                                        className={styles.weddingCardImage} 
+                                        loading="lazy"
+                                      />
+                                    </div>
+                                    <span className={styles.weddingCardTitle}>{wedding.title}</span>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+
                           </div>
                         </div>
                       )}
