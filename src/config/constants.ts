@@ -49,7 +49,7 @@ export const APP_CONFIG = {
       { label: 'Venues', href: '/venues', dropdownType: 'venues' },
       { label: 'Vendors', href: '/vendors', dropdownType: 'vendors' },
       { label: 'Weddings', href: '/real-weddings', dropdownType: 'weddings' },
-      { label: 'Photos', href: '/photos' },
+      { label: 'Photos', href: '/photos', dropdownType: 'photos' },
       { label: 'Blog', href: '/blog' },
       { label: 'E-Invites', href: '/invites' },
       { label: 'Genie', href: '/genie' },
@@ -286,6 +286,101 @@ export const APP_CONFIG = {
           title: 'Deepshikha and Saiteej (Delhi NCR)',
           image: '/weddings/wedding2.jpg',
           href: '/real-weddings/deepshikha-saiteej'
+        }
+      ]
+    },
+    photosDropdown: {
+      columns: [
+        // Column 1
+        {
+          sections: [
+            {
+              title: 'Outfit',
+              items: [
+                { label: 'Bridal Lehenga', href: '/photos?category=bridal-lehenga' },
+                { label: 'Wedding Sarees', href: '/photos?category=wedding-sarees' },
+                { label: 'Engagement', href: '/photos?category=engagement-outfit' },
+                { label: 'Mehndi', href: '/photos?category=mehndi-outfit' },
+                { label: 'Blouse Designs', href: '/photos?category=blouse-designs' },
+                { label: 'More', href: '/photos?category=outfit', isBold: true }
+              ]
+            },
+            {
+              title: 'Jewellery & Accessories',
+              items: [
+                { label: 'Bridal Jewellery', href: '/photos?category=bridal-jewellery' },
+                { label: 'Engagement Rings', href: '/photos?category=engagement-rings' },
+                { label: 'Floral Jewellery', href: '/photos?category=floral-jewellery' },
+                { label: 'More', href: '/photos?category=jewellery', isBold: true }
+              ]
+            },
+            {
+              title: 'Mehndi',
+              items: [
+                { label: 'Arabic', href: '/photos?category=arabic-mehndi' },
+                { label: 'Mehndi Designs', href: '/photos?category=mehndi-designs' },
+                { label: 'Simple', href: '/photos?category=simple-mehndi' },
+                { label: 'Unique', href: '/photos?category=unique-mehndi' },
+                { label: 'More', href: '/photos?category=mehndi', isBold: true }
+              ]
+            }
+          ]
+        },
+        // Column 2
+        {
+          sections: [
+            {
+              title: 'Decor & Ideas',
+              items: [
+                { label: 'Wedding Decor', href: '/photos?category=wedding-decor' },
+                { label: 'Bridal Entry', href: '/photos?category=bridal-entry' },
+                { label: 'Groom Entry', href: '/photos?category=groom-entry' },
+                { label: 'Wedding Games', href: '/photos?category=wedding-games' },
+                { label: 'More', href: '/photos?category=decor', isBold: true }
+              ]
+            },
+            {
+              title: 'Wedding Card Designs',
+              items: [
+                { label: 'Designs', href: '/photos?category=card-designs' },
+                { label: 'Wedding Gifts', href: '/photos?category=wedding-gifts' },
+                { label: 'Wedding Invitations', href: '/photos?category=wedding-invitations' },
+                { label: 'More', href: '/photos?category=invitations', isBold: true }
+              ]
+            },
+            {
+              title: 'Wedding Photography',
+              items: [
+                { label: 'Pre Wedding Shoot', href: '/photos?category=pre-wedding-shoot' },
+                { label: 'Wedding', href: '/photos?category=wedding-photography' },
+                { label: 'Wedding Photoshoot & Poses', href: '/photos?category=wedding-poses' },
+                { label: 'More', href: '/photos?category=photography', isBold: true }
+              ]
+            }
+          ]
+        },
+        // Column 3
+        {
+          sections: [
+            {
+              title: 'Groom Wear',
+              items: [
+                { label: 'Sherwani for Groom', href: '/photos?category=sherwani-groom' },
+                { label: 'Wedding Suits for Groom', href: '/photos?category=suits-groom' },
+                { label: 'More', href: '/photos?category=groom-wear', isBold: true }
+              ]
+            },
+            {
+              title: 'Bridal Makeup & Hair',
+              items: [
+                { label: 'Bridal Makeup', href: '/photos?category=bridal-makeup' },
+                { label: 'Bridal Hairstyles', href: '/photos?category=bridal-hairstyles' },
+                { label: 'Engagement', href: '/photos?category=engagement-makeup' },
+                { label: 'Mehndi', href: '/photos?category=mehndi-makeup' },
+                { label: 'More', href: '/photos?category=makeup-hair', isBold: true }
+              ]
+            }
+          ]
         }
       ]
     }

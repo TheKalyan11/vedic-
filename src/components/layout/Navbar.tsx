@@ -440,6 +440,55 @@ export const Navbar = () => {
                   );
                 }
 
+                // 4. Photos Mega Dropdown
+                if (item.dropdownType === 'photos') {
+                  const isOpen = activeDropdown === 'photos';
+                  return (
+                    <div 
+                      key={item.label}
+                      className={styles.menuItemWrapper}
+                      onMouseEnter={() => setActiveDropdown('photos')}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <Link 
+                        href={item.href} 
+                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
+                      >
+                        {item.label}
+                      </Link>
+
+                      {isOpen && (
+                        <div className={styles.photosMegaDropdown}>
+                          <div className={styles.photosMegaContainer}>
+                            {APP_CONFIG.navigation.photosDropdown.columns.map((col, colIndex) => (
+                              <div key={colIndex} className={styles.photoColumn}>
+                                {col.sections.map((section) => (
+                                  <div key={section.title} className={styles.photoSection}>
+                                    <h4 className={styles.photoSectionTitle}>{section.title}</h4>
+                                    <ul className={styles.photoList}>
+                                      {section.items.map((subItem) => (
+                                        <li key={subItem.label}>
+                                          <Link 
+                                            href={subItem.href} 
+                                            className={`${styles.photoLink} ${subItem.isBold ? styles.boldLink : ''}`}
+                                            onClick={() => setActiveDropdown(null)}
+                                          >
+                                            {subItem.label}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <Link key={item.label} href={item.href} className={styles.navLink}>
                     {item.label}
