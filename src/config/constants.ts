@@ -48,8 +48,8 @@ export const APP_CONFIG = {
     mainMenu: [
       { label: 'Venues', href: '/venues', dropdownType: 'venues' },
       { label: 'Vendors', href: '/vendors', dropdownType: 'vendors' },
+      { label: 'Weddings', href: '/real-weddings' },
       { label: 'Photos', href: '/photos' },
-      { label: 'Real Weddings', href: '/real-weddings' },
       { label: 'Blog', href: '/blog' },
       { label: 'E-Invites', href: '/invites' },
       { label: 'Genie', href: '/genie' },
