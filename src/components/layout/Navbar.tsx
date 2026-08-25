@@ -489,6 +489,47 @@ export const Navbar = () => {
                   );
                 }
 
+                // 5. E-Invites Dropdown
+                if (item.dropdownType === 'invites') {
+                  const isOpen = activeDropdown === 'invites';
+                  return (
+                    <div 
+                      key={item.label}
+                      className={styles.menuItemWrapper}
+                      onMouseEnter={() => setActiveDropdown('invites')}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <Link 
+                        href={item.href} 
+                        className={`${styles.navLink} ${isOpen ? styles.navLinkActive : ''}`}
+                      >
+                        {item.label}
+                      </Link>
+
+                      {isOpen && (
+                        <div className={styles.invitesDropdown}>
+                          <h4 className={styles.invitesTitle}>
+                            {APP_CONFIG.navigation.invitesDropdown.title}
+                          </h4>
+                          <ul className={styles.invitesList}>
+                            {APP_CONFIG.navigation.invitesDropdown.items.map((subItem) => (
+                              <li key={subItem.label}>
+                                <Link 
+                                  href={subItem.href} 
+                                  className={styles.invitesLink}
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {subItem.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
                 return (
                   <Link key={item.label} href={item.href} className={styles.navLink}>
                     {item.label}

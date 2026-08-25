@@ -50,7 +50,7 @@ export const APP_CONFIG = {
       { label: 'Vendors', href: '/vendors', dropdownType: 'vendors' },
       { label: 'Weddings', href: '/real-weddings', dropdownType: 'weddings' },
       { label: 'Photos', href: '/photos', dropdownType: 'photos' },
-      { label: 'E-Invites', href: '/invites' },
+      { label: 'E-Invites', href: '/invites', dropdownType: 'invites' },
       { label: 'Blog', href: '/blog' },
       { label: 'Genie', href: '/genie' },
     ],
@@ -291,7 +291,6 @@ export const APP_CONFIG = {
     },
     photosDropdown: {
       columns: [
-        // Column 1
         {
           sections: [
             {
@@ -326,7 +325,6 @@ export const APP_CONFIG = {
             }
           ]
         },
-        // Column 2
         {
           sections: [
             {
@@ -359,7 +357,6 @@ export const APP_CONFIG = {
             }
           ]
         },
-        // Column 3
         {
           sections: [
             {
@@ -382,6 +379,14 @@ export const APP_CONFIG = {
             }
           ]
         }
+      ]
+    },
+    invitesDropdown: {
+      title: 'Wedding Invitation Maker',
+      items: [
+        { label: 'Wedding Card Designs', href: '/invites?type=cards' },
+        { label: 'Invitation Video Templates', href: '/invites?type=video-templates' },
+        { label: 'Save the Date Templates', href: '/invites?type=save-the-date' },
       ]
     }
   }
