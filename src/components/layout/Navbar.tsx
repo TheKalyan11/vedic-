@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { APP_CONFIG } from '../../config/constants';
 import { LoginButton } from '../ui/LoginButton';
+import { useLocation } from '../../context/LocationContext';
 import styles from './Navbar.module.css';
 
 export const Navbar = () => {
@@ -11,9 +12,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState(
-    APP_CONFIG.navigation.topBar.defaultLocation || 'Hyderabad'
-  );
+  const { selectedLocation, setSelectedLocation } = useLocation();
   const [locationSearch, setLocationSearch] = useState('');
   
   const locationRef = useRef<HTMLDivElement>(null);
@@ -376,20 +375,23 @@ export const Navbar = () => {
                         <div key={section.title} className={styles.unifiedSubSection}>
                           <h4 className={styles.unifiedSectionTitle}>{section.title}</h4>
                           <ul className={styles.unifiedList}>
-                            {section.items.map((subItem) => (
-                              <li key={subItem.label}>
-                                <Link 
-                                  href={subItem.href} 
-                                  className={`${styles.unifiedLink} ${subItem.isBold ? styles.unifiedBoldLink : ''}`}
-                                  onClick={() => setActiveDropdown(null)}
-                                >
-                                  <span>{subItem.label}</span>
-                                  {subItem.badge && (
-                                    <span className={styles.unifiedBadge}>{subItem.badge}</span>
-                                  )}
-                                </Link>
-                              </li>
-                            ))}
+                            {section.items.map((subItem) => {
+                              const item = subItem as { label: string; href: string; isBold?: boolean; badge?: string };
+                              return (
+                                <li key={item.label}>
+                                  <Link 
+                                    href={item.href} 
+                                    className={`${styles.unifiedLink} ${item.isBold ? styles.unifiedBoldLink : ''}`}
+                                    onClick={() => setActiveDropdown(null)}
+                                  >
+                                    <span>{item.label}</span>
+                                    {item.badge && (
+                                      <span className={styles.unifiedBadge}>{item.badge}</span>
+                                    )}
+                                  </Link>
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                       ))}

@@ -99,7 +99,7 @@
 }
 
 .section {
-  padding: var(--spacing-3xl) 0;
+  padding: 2.5rem 0 3.5rem 0; /* Tightened from 6rem */
   background-color: var(--color-background);
 }
 
@@ -113,7 +113,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: 1.75rem; /* Tightened from 4rem */
 }
 
 .sectionSub {
@@ -123,11 +123,11 @@
   font-size: 0.875rem;
   font-weight: 600;
   display: block;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 0.25rem; /* Tightened from 0.5rem */
 }
 
 .sectionTitle {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   margin: 0;
   color: var(--color-text-primary);
 }
@@ -150,7 +150,7 @@
 .venueGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: var(--spacing-xl);
+  gap: 2rem;
 }
 
 .philosophySection {

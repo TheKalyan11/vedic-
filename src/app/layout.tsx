@@ -3,6 +3,7 @@ import { Outfit, Lora } from "next/font/google";
 import { Navbar } from "../components/layout/Navbar";
 import { Footer } from "../components/layout/Footer";
 import { FloatingWhatsApp } from "../components/ui/FloatingWhatsApp";
+import { LocationProvider } from "../context/LocationContext";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -28,12 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${lora.variable}`}>
       <body>
-        <Navbar />
-        <main style={{ minHeight: 'calc(100vh - 140px)' }}>
-          {children}
-        </main>
-        <FloatingWhatsApp />
-        <Footer />
+        <LocationProvider>
+          <Navbar />
+          <main style={{ minHeight: 'calc(100vh - 140px)' }}>
+            {children}
+          </main>
+          <FloatingWhatsApp />
+          <Footer />
+        </LocationProvider>
       </body>
     </html>
   );

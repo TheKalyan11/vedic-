@@ -1,26 +1,33 @@
-.card {
-  background-color: var(--color-surface);
-  border-radius: var(--radius-lg);
+.cardFrame {
+  position: relative;
+  border-radius: 28px;
+  border: 5px solid #57a9c5; /* Uniform crisp teal border around entire card */
+  background: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  border: 1px solid var(--color-border-light);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
-  position: relative;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(211, 84, 0, 0.2);
+.cardFrame:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(87, 169, 197, 0.28);
 }
 
-.imageContainer {
+.linkOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+/* Image Container */
+.imageWrapper {
   position: relative;
   width: 100%;
-  height: 240px;
+  height: 260px;
+  background-color: #E2E8F0;
   overflow: hidden;
 }
 
@@ -28,103 +35,183 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+  object-position: center;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card:hover .image {
-  transform: scale(1.08);
+.cardFrame:hover .image {
+  transform: scale(1.06);
 }
 
-.badge {
+/* Top Floating Badges (Left Tags Only) */
+.badgeContainer {
   position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  background-color: rgba(255, 255, 255, 0.95);
-  color: var(--color-primary-dark);
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 8px;
   z-index: 2;
 }
 
-.content {
-  padding: var(--spacing-xl);
+.badgeOrange {
+  background: #FFFFFF;
+  color: #D35400; /* Orange badge text */
+  font-family: var(--font-outfit);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.badgeGreen {
+  background: #FFFFFF;
+  color: #558B2F; /* Green badge text */
+  font-family: var(--font-outfit);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Bottom Floating White Info Box */
+.infoCard {
+  background: #FFFFFF;
+  border-radius: 24px 24px 0 0;
+  padding: 1.35rem 1.4rem 1.25rem 1.4rem;
+  margin-top: -24px; /* Clean overlap over bottom of image */
+  position: relative;
+  z-index: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
-.header {
+/* Category & Star Rating Row */
+.categoryRow {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: var(--spacing-xs);
+  align-items: center;
+  margin-bottom: 4px;
 }
 
-.title {
-  font-size: 1.35rem;
-  margin: 0;
-  color: var(--color-text-primary);
-  font-family: var(--font-heading);
+.venueType {
+  font-family: var(--font-outfit);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0066FF; /* Prominent bright blue from reference image */
+  letter-spacing: -0.2px;
 }
 
-.rating {
+.ratingBadge {
+  font-family: var(--font-outfit);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #D35400;
+  background: #FFF5EC;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+/* Address */
+.addressText {
+  font-family: var(--font-outfit);
+  font-size: 0.88rem;
+  color: #64748B;
+  margin: 4px 0 6px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Venue Title */
+.venueTitle {
+  font-family: var(--font-outfit);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 2px 0 16px 0;
+  line-height: 1.3;
+}
+
+/* Specs Row */
+.specsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-outfit);
+  font-size: 0.86rem;
   font-weight: 600;
-  color: var(--color-secondary-dark);
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.9rem;
-}
-
-.location {
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  margin-bottom: var(--spacing-lg);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.details {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  color: #1F2937;
   margin-top: auto;
-  padding-top: var(--spacing-lg);
-  border-top: 1px solid var(--color-border-light);
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F3F4F6;
 }
 
-.capacity {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
+.specItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
-.priceBlock {
-  text-align: right;
+.specIcon {
+  width: 16px;
+  height: 16px;
+  color: #1E293B;
+  flex-shrink: 0;
 }
 
-.price {
-  font-weight: 600;
-  color: var(--color-primary-dark);
-  font-size: 1.25rem;
-  display: block;
+.specDivider {
+  color: #D1D5DB;
+  font-weight: 300;
 }
 
-.priceLabel {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
+/* Footer Row */
+.footerRow {
+  font-family: var(--font-outfit);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6B7280;
+  letter-spacing: 0.6px;
+  margin-top: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-.linkOverlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
+.listedBrand {
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .imageWrapper {
+    height: 220px;
+  }
+
+  .infoCard {
+    padding: 1.15rem 1.15rem 1rem 1.15rem;
+  }
+
+  .venueType {
+    font-size: 1.05rem;
+  }
+
+  .venueTitle {
+    font-size: 1.05rem;
+  }
+
+  .specsRow {
+    font-size: 0.8rem;
+    gap: 4px;
+  }
+
+  .badgeOrange, .badgeGreen {
+    font-size: 0.65rem;
+    padding: 4px 8px;
+  }
 }

@@ -51,8 +51,8 @@ export default async function VenueDetailsPage({ params }: { params: { id: strin
             <div className={styles.bookingCard}>
               <div className={styles.priceHeader}>
                 <div className={styles.priceBlock}>
-                  <span className={styles.price}>₹{venue.pricePerDay.toLocaleString()}</span>
-                  <span className={styles.perDay}>/ day</span>
+                  <span className={styles.price}>Price on Request</span>
+                  <span className={styles.perDay}>Custom packages & dates</span>
                 </div>
                 <div className={styles.ratingBlock}>
                   <span className={styles.ratingValue}>★ {venue.rating}</span>
@@ -65,18 +65,18 @@ export default async function VenueDetailsPage({ params }: { params: { id: strin
                   <strong>Up to {venue.capacity} guests</strong>
                 </div>
                 <div className={styles.infoRow}>
-                  <span>Property Type</span>
-                  <strong>{venue.type}</strong>
+                  <span>Venue Type</span>
+                  <strong>{venue.type} Mandap & Lawns</strong>
                 </div>
               </div>
               
               <Link href={`/venues/${id}/book`} className={styles.bookAction}>
                 <Button size="lg" fullWidth variant="primary">
-                  Reserve this Venue
+                  Request Pricing & Availability
                 </Button>
               </Link>
               
-              <p className={styles.guarantee}>Secure booking. No immediate charges.</p>
+              <p className={styles.guarantee}>Direct inquiry. Expert Vedic coordinator assistance.</p>
             </div>
           </div>
         </div>
