@@ -133,6 +133,15 @@ export const Footer = () => {
             <p className={styles.footerDescription}>
               The most trusted platform for booking regal palaces, sacred mandaps, and verified vendors.
             </p>
+            
+            <div className={styles.mobileFooterActions}>
+              <Link href="/vedic-marriage" className={styles.mobileFooterActionBtn}>
+                Visit Vedic Marriage <ArrowRight size={14} className={styles.actionIcon} />
+              </Link>
+              <Link href="/review" className={styles.mobileFooterActionBtn}>
+                Write a Review <ArrowRight size={14} className={styles.actionIcon} />
+              </Link>
+            </div>
           </div>
 
           {/* Column 2: Information */}

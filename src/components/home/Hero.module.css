@@ -279,41 +279,57 @@
   color: var(--color-primary, #D35400);
 }
 
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 0 2rem 3rem 2rem;
+  }
+  .dropdownGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .heroSection {
-    height: 76vh;
-    min-height: 570px;
+    height: 100svh;
+    min-height: auto;
+    max-height: none;
   }
 
   .heroContent {
-    padding: 0 1rem 2.5rem 1rem;
+    padding: 0 1rem 4rem 1rem;
   }
   
   .animatedHeadingContainer {
-    height: 80px;
+    height: auto;
+    min-height: 80px;
   }
 
   .animatedHeading {
-    font-size: 1.8rem;
-    white-space: normal; /* Allow wrap on very small screens if necessary */
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    white-space: normal;
+    line-height: 1.15;
   }
   
   .searchText {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     padding: 0 1rem;
   }
 
-  .searchBar, .searchIconArea, .searchArrow {
-    height: 60px;
+  .searchBar {
+    height: auto;
+    min-height: 56px;
+    padding-right: 0;
   }
-  
+
   .searchIconArea, .searchArrow {
-    width: 60px;
+    width: 56px;
+    height: 56px;
   }
 
   .searchDropdown {
     padding: 1.25rem 1rem;
     width: 96vw;
+    top: calc(100% + 5px);
   }
 
   .dropdownGrid {
@@ -326,5 +342,23 @@
   .dropdownGrid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+  
+  .animatedHeading {
+    font-size: clamp(1.75rem, 9vw, 2.25rem);
+  }
+  
+  .searchBar {
+    border-radius: 6px;
+  }
+  
+  .searchText {
+    font-size: 0.95rem;
+    padding: 0 0.75rem;
+  }
+  
+  .searchIconArea, .searchArrow {
+    width: 48px;
+    height: 48px;
   }
 }

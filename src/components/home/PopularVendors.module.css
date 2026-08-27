@@ -298,15 +298,21 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .vendorsSection {
-    padding: 0;
+    padding: 2rem 0;
   }
 
   .header {
@@ -315,12 +321,17 @@
     gap: 0.75rem;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  .title {
+    font-size: clamp(1.75rem, 5vw, 2.2rem);
   }
 
-  .title {
-    font-size: 1.75rem;
+  .grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

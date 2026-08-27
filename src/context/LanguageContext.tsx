@@ -19,6 +19,7 @@ export const SUPPORTED_LANGUAGES: LanguageOption[] = [
   { code: 'te', label: 'Telugu', nativeName: 'తెలుగు' },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TRANSLATIONS: Record<LanguageCode, any> = {
   en,
   hi,
@@ -42,6 +43,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
     try {
       const savedLang = localStorage.getItem('vedic_language') as LanguageCode;
       if (savedLang && (savedLang === 'en' || savedLang === 'hi' || savedLang === 'te')) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLanguageState(savedLang);
         document.documentElement.lang = savedLang;
       }
@@ -68,6 +70,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
     const keys = key.split('.');
     
     // 1. Try currently active language
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = TRANSLATIONS[language];
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {

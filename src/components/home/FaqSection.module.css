@@ -266,3 +266,21 @@
     gap: 3rem;
   }
 }
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 0;
+  }
+  .title {
+    font-size: clamp(2rem, 6vw, 2.8rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .bookingCard {
+    padding: 1.5rem;
+  }
+  .question {
+    font-size: 1.05rem;
+  }
+}

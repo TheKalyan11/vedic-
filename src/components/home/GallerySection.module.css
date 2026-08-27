@@ -100,3 +100,33 @@
   pointer-events: none;
   display: block;
 }
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 0;
+  }
+  
+  .title {
+    font-size: clamp(2rem, 6vw, 2.6rem);
+  }
+  
+  .galleryContainer {
+    height: 350px;
+  }
+  
+  .galleryItem {
+    width: 240px;
+    height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryContainer {
+    height: 280px;
+  }
+  
+  .galleryItem {
+    width: 200px;
+    height: 260px;
+  }
+}

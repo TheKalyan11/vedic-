@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Sparkles, Send, X, Bot, RotateCcw, ChevronRight } from 'lucide-react';
+import { Sparkles, Send, X, RotateCcw, ChevronRight } from 'lucide-react';
 import styles from './FloatingAIChatbot.module.css';
 
 interface Message {
@@ -99,12 +99,13 @@ const KNOWLEDGE_BASE: Record<string, { reply: string; cards?: Message['cards']; 
   }
 };
 
+let nextMessageId = 2; // Starting after initial messages
+
 export const FloatingAIChatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [hasUnread, setHasUnread] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -114,7 +115,6 @@ export const FloatingAIChatbot: React.FC = () => {
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
-      setHasUnread(false);
     }
   }, [isOpen, messages, isTyping]);
 
@@ -123,7 +123,7 @@ export const FloatingAIChatbot: React.FC = () => {
     if (!query) return;
 
     const userMessage: Message = {
-      id: Date.now().toString(),
+      id: String(nextMessageId++),
       sender: 'user',
       text: query,
       timestamp: 'Just now'
@@ -149,7 +149,7 @@ export const FloatingAIChatbot: React.FC = () => {
       }
 
       const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
+        id: String(nextMessageId++),
         sender: 'bot',
         text: match.reply,
         timestamp: 'Just now',

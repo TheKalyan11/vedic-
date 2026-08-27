@@ -637,11 +637,61 @@
     padding-bottom: 1rem;
     align-items: center;
   }
+  
+  .appTitle {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+  }
 
   .appSubtitle {
     margin-inline: auto;
   }
+}
 
+.mobileFooterActions {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileFooterActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
+
+  .mobileFooterActionBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(211, 84, 0, 0.05); /* Very light brand color background */
+    color: var(--color-primary); /* Primary brand color */
+    padding: 14px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(211, 84, 0, 0.15);
+  }
+
+  .mobileFooterActionBtn:hover, 
+  .mobileFooterActionBtn:active {
+    background: rgba(211, 84, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(211, 84, 0, 0.08);
+  }
+  
+  .actionIcon {
+    color: var(--color-primary);
+    transition: transform 0.3s ease;
+  }
+  
+  .mobileFooterActionBtn:hover .actionIcon {
+    transform: translateX(4px);
+  }
+}
+
+@media (max-width: 900px) {
   .storeBadges {
     justify-content: center;
   }

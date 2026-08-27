@@ -18,6 +18,13 @@
   right: 0;
   z-index: 1002; /* Higher z-index to stay permanently on top */
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.topBarHidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .topBarContainer {
@@ -38,7 +45,7 @@
   position: relative;
 }
 
-.tagline {
+.desktopTagline {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1.02rem;
@@ -48,9 +55,12 @@
 }
 
 @media (max-width: 860px) {
-  .tagline {
+  .desktopTagline {
     display: none;
   }
+}
+
+@media (max-width: 480px) {
 }
 
 /* Location Container & Button */
@@ -414,12 +424,13 @@
   display: flex;
   justify-content: center;
   padding-top: 0;
-  transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
 /* Before scrolling (Top of page): Full-Width Solid White Navigation */
 .mainNav {
+  position: relative;
   width: 100%;
   max-width: 100%;
   background: #FFFFFF; /* Pure Solid White */
@@ -437,6 +448,7 @@
 
 /* While Scrolling State: Floating Rounded Liquid-Glass Navbar (No internal compression) */
 .mainNavContainer.scrolled {
+  top: 0;
   padding-top: 8px;
 }
 
@@ -606,6 +618,30 @@
   display: none;
 }
 
+.desktopLoginOnly {
+  display: block;
+}
+
+.mobileLoginContainer {
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Make LoginButton full-width on mobile */
+.mobileLoginContainer > a {
+  width: 100%;
+}
+.mobileLoginContainer div[role="button"] {
+  width: 100%;
+  max-width: 100%;
+}
+.mobileLoginContainer div[role="button"] > div {
+  width: calc(100% - 6px);
+  max-width: 100%;
+}
+
 @media (max-width: 992px) {
   .locationMegaDropdown {
     width: 90vw;
@@ -632,6 +668,14 @@
     display: block;
   }
   
+  .desktopLoginOnly {
+    display: none;
+  }
+  
+  .topBarRight {
+    display: none;
+  }
+  
   .mobileMenu {
     display: block;
     position: absolute;
@@ -656,7 +700,7 @@
   }
 
   .mobileMenuOpen {
-    max-height: 600px;
+    max-height: 80vh; /* Allow it to be taller if needed */
     opacity: 1;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
   }
@@ -666,16 +710,70 @@
     flex-direction: column;
     padding: var(--spacing-xl);
     gap: var(--spacing-md);
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
   }
 
-  .mobileNavLinks a {
+  .mobileAccordionWrapper {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    padding-bottom: 8px;
+  }
+
+  .mobileAccordionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .mobileMainLink {
     font-size: 1.05rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-text-primary);
     transition: color var(--transition-fast);
+    padding: 8px 0;
+    flex: 1;
   }
 
-  .mobileNavLinks a:hover {
+  .mobileMainLink:hover {
+    color: var(--color-primary);
+  }
+
+  .mobileAccordionToggle {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+  }
+
+  .accordionIcon {
+    transition: transform 0.3s ease;
+  }
+
+  .accordionIconOpen {
+    transform: rotate(180deg);
+  }
+
+  .mobileAccordionContent {
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--spacing-md);
+    gap: 8px;
+    margin-top: 8px;
+    border-left: 2px solid var(--color-primary-light);
+  }
+
+  .mobileSubLink {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    padding: 6px 0;
+    transition: color 0.2s ease;
+  }
+
+  .mobileSubLink:hover {
     color: var(--color-primary);
   }
 
@@ -685,10 +783,7 @@
     margin: var(--spacing-sm) 0;
   }
 
-  .mobileActionLink {
-    color: var(--color-primary-dark) !important;
-    font-weight: 600 !important;
-  }
+
 }
 
 @media (max-width: 600px) {

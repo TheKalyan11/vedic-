@@ -18,6 +18,7 @@ export const Navbar = () => {
   const { selectedLocation, setSelectedLocation } = useLocation();
   const { language, setLanguage, t, languages } = useLanguage();
   const [locationSearch, setLocationSearch] = useState('');
+  const [activeMobileAccordion, setActiveMobileAccordion] = useState<string | null>(null);
   
   const locationRef = useRef<HTMLDivElement>(null);
   const languageRef = useRef<HTMLDivElement>(null);
@@ -43,6 +44,7 @@ export const Navbar = () => {
       }
       if (navContainerRef.current && !navContainerRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
+        setIsMobileMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -50,6 +52,18 @@ export const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   const handleSelectCity = (city: string) => {
     setSelectedLocation(city);
@@ -105,11 +119,11 @@ export const Navbar = () => {
   return (
     <div className={styles.navWrapper} ref={navContainerRef}>
       {/* 1. Top Navigation Bar */}
-      <div className={styles.topBar}>
+      <div className={`${styles.topBar} ${isScrolled ? styles.topBarHidden : ''}`}>
         <div className={styles.topBarContainer}>
           {/* Left: Tagline + Location Selector Box + Language Selector */}
           <div className={styles.topBarLeft}>
-            <span className={styles.tagline}>{t('nav.tagline')}</span>
+            <span className={styles.desktopTagline}>{t('nav.tagline')}</span>
             
             {/* Location Selector Mega Dropdown Container */}
             <div className={styles.locationContainer} ref={locationRef}>
@@ -347,9 +361,9 @@ export const Navbar = () => {
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
               </button>
-              
-              <LoginButton />
-              
+              <div className={styles.desktopLoginOnly}>
+                <LoginButton />
+              </div>
               <button 
                 className={styles.mobileToggle} 
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -683,17 +697,64 @@ export const Navbar = () => {
         {/* Mobile Menu Overlay */}
         <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
           <nav className={styles.mobileNavLinks}>
-            {APP_CONFIG.navigation.mainMenu.map(item => (
-              <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
-                {item.label}
-              </Link>
-            ))}
+            {APP_CONFIG.navigation.mainMenu.map(item => {
+              const isAccordionActive = activeMobileAccordion === item.dropdownType;
+              const hasDropdown = item.dropdownType !== undefined && APP_CONFIG.navigation[`${item.dropdownType}Dropdown` as keyof typeof APP_CONFIG.navigation];
+              
+              return (
+                <div key={item.label} className={styles.mobileAccordionWrapper}>
+                  {hasDropdown ? (
+                    <button 
+                      className={styles.mobileAccordionHeader}
+                      onClick={() => setActiveMobileAccordion(isAccordionActive ? null : item.dropdownType)}
+                      aria-expanded={isAccordionActive}
+                      style={{ background: 'transparent', border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer' }}
+                    >
+                      <span className={styles.mobileMainLink} style={{ flex: 1, padding: '8px 0', display: 'block' }}>{item.label}</span>
+                      <div className={styles.mobileAccordionToggle}>
+                        <ChevronDown size={20} className={`${styles.accordionIcon} ${isAccordionActive ? styles.accordionIconOpen : ''}`} />
+                      </div>
+                    </button>
+                  ) : (
+                    <div className={styles.mobileAccordionHeader}>
+                      <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)} className={styles.mobileMainLink} style={{ display: 'block', width: '100%' }}>
+                        {item.label}
+                      </Link>
+                    </div>
+                  )}
+                  {hasDropdown && isAccordionActive && (
+                    <div className={styles.mobileAccordionContent}>
+                      {/* We'll render simplified links based on the dropdown config */}
+                      {item.dropdownType === 'venues' && APP_CONFIG.navigation.venuesDropdown.byType.map(sub => (
+                        <Link key={sub.label} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.label}</Link>
+                      ))}
+                      {item.dropdownType === 'vendors' && APP_CONFIG.navigation.vendorsDropdown.columns[0].sections[0].items.map(sub => (
+                        <Link key={sub.label} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.label}</Link>
+                      ))}
+                      {item.dropdownType === 'weddings' && APP_CONFIG.navigation.weddingsDropdown.byCulture.map(sub => (
+                        <Link key={sub.label} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.label}</Link>
+                      ))}
+                      {item.dropdownType === 'photos' && APP_CONFIG.navigation.photosDropdown.columns[0].sections[0].items.map(sub => (
+                        <Link key={sub.label} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.label}</Link>
+                      ))}
+                      {item.dropdownType === 'invites' && APP_CONFIG.navigation.invitesDropdown.columns[0].sections[0].items.map(sub => (
+                        <Link key={sub.label} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.label}</Link>
+                      ))}
+                      {item.dropdownType === 'blog' && APP_CONFIG.navigation.blogDropdown.columns[0].sections[0].items.map(sub => (
+                        <Link key={sub.label} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.label}</Link>
+                      ))}
+                      {item.dropdownType === 'genie' && APP_CONFIG.navigation.genieDropdown.services.map(sub => (
+                        <Link key={sub.title} href={sub.href} className={styles.mobileSubLink} onClick={() => setIsMobileMenuOpen(false)}>{sub.title}</Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             <hr className={styles.mobileDivider} />
-            {APP_CONFIG.navigation.topBar.actions.map(action => (
-              <Link key={action.label} href={action.href} onClick={() => setIsMobileMenuOpen(false)} className={styles.mobileActionLink}>
-                {action.label}
-              </Link>
-            ))}
+            <div className={styles.mobileLoginContainer}>
+              <LoginButton />
+            </div>
           </nav>
         </div>
       </header>

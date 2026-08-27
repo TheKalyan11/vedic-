@@ -7,6 +7,7 @@ import styles from './page.module.css';
 
 export default function BookingPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id } = use(params);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 

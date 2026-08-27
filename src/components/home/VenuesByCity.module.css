@@ -201,7 +201,7 @@
   height: 9px;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -209,7 +209,7 @@
 
 @media (max-width: 768px) {
   .citySection {
-    padding: 0;
+    padding: 2rem 0;
   }
 
   .header {
@@ -219,7 +219,7 @@
   }
 
   .title {
-    font-size: 1.65rem;
+    font-size: clamp(1.75rem, 6vw, 2.1rem);
   }
 
   .subtitle {
@@ -242,5 +242,16 @@
 
   .venueCount {
     font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .cityCard {
+    height: 190px;
   }
 }
