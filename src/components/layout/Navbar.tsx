@@ -6,6 +6,7 @@ import { APP_CONFIG } from '../../config/constants';
 import { LoginButton } from '../ui/LoginButton';
 import { useLocation } from '../../context/LocationContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { Globe, ChevronDown, Check } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 export const Navbar = () => {
@@ -63,15 +64,16 @@ export const Navbar = () => {
     }
     if (dropdownType) {
       setActiveDropdown(dropdownType);
-    } else {
-      setActiveDropdown(null);
     }
   };
 
   const handleMouseLeaveNav = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
     closeTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 150);
+    }, 300);
   };
 
   const handleMouseEnterDropdown = () => {
@@ -191,11 +193,11 @@ export const Navbar = () => {
                 aria-expanded={isLanguageOpen}
                 aria-label={t('common.selectLanguage')}
               >
-                <span className={styles.globeIcon}>🌐</span>
+                <Globe size={16} strokeWidth={1.5} className={styles.globeIcon} />
                 <span className={styles.selectedLangText}>
                   {languages.find((l) => l.code === language)?.nativeName || 'English'}
                 </span>
-                <span className={`${styles.dropdownArrow} ${isLanguageOpen ? styles.dropdownArrowOpen : ''}`}>▼</span>
+                <ChevronDown size={14} strokeWidth={2} className={`${styles.dropdownArrow} ${isLanguageOpen ? styles.dropdownArrowOpen : ''}`} />
               </button>
 
               {/* Language Dropdown Menu */}
@@ -214,9 +216,7 @@ export const Navbar = () => {
                         >
                           <span>{langOption.nativeName} ({langOption.label})</span>
                           {language === langOption.code && (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={styles.langCheckIcon}>
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
+                            <Check size={16} strokeWidth={2.5} className={styles.langCheckIcon} />
                           )}
                         </button>
                       </li>

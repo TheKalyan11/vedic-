@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { Crown, Landmark, BadgeCheck, ArrowRight, Star } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import styles from './PhilosophySection.module.css';
 
-const MAIN_IMAGE = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&auto=format&fit=crop&q=80';
-const SECONDARY_IMAGE = 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800&auto=format&fit=crop&q=80';
-const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&auto=format&fit=crop&q=80';
+const MAIN_IMAGE = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&auto=format&fit=crop&q=80';
+const SECONDARY_IMAGE = 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&auto=format&fit=crop&q=80';
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&auto=format&fit=crop&q=80';
 
 export const PhilosophySection: React.FC = () => {
   const { t } = useLanguage();
@@ -32,9 +33,7 @@ export const PhilosophySection: React.FC = () => {
               {/* Pillar 1 */}
               <div className={styles.pillarItem}>
                 <div className={styles.iconBox} aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                  </svg>
+                  <Crown size={22} strokeWidth={1.75} />
                 </div>
                 <div className={styles.pillarText}>
                   <h3 className={styles.pillarTitle}>{t('philosophy.pillar1Title')}</h3>
@@ -45,9 +44,7 @@ export const PhilosophySection: React.FC = () => {
               {/* Pillar 2 */}
               <div className={styles.pillarItem}>
                 <div className={styles.iconBox} aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6a3 3 0 0 1 6 0v6M12 4v2"/>
-                  </svg>
+                  <Landmark size={22} strokeWidth={1.75} />
                 </div>
                 <div className={styles.pillarText}>
                   <h3 className={styles.pillarTitle}>{t('philosophy.pillar2Title')}</h3>
@@ -58,10 +55,7 @@ export const PhilosophySection: React.FC = () => {
               {/* Pillar 3 */}
               <div className={styles.pillarItem}>
                 <div className={styles.iconBox} aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="M9 12l2 2 4-4"/>
-                  </svg>
+                  <BadgeCheck size={22} strokeWidth={1.75} />
                 </div>
                 <div className={styles.pillarText}>
                   <h3 className={styles.pillarTitle}>{t('philosophy.pillar3Title')}</h3>
@@ -72,7 +66,7 @@ export const PhilosophySection: React.FC = () => {
 
             {/* Direct CTA */}
             <Link href="/venues" className={styles.ctaBtn}>
-              {t('philosophy.cta')} <span aria-hidden="true">→</span>
+              {t('philosophy.cta')} <ArrowRight size={16} strokeWidth={2} />
             </Link>
           </div>
 
@@ -108,9 +102,7 @@ export const PhilosophySection: React.FC = () => {
             {/* Floating Glass Trust Badge */}
             <div className={styles.trustBadge}>
               <div className={styles.trustBadgeIcon} aria-hidden="true">
-                <svg viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                </svg>
+                <Star size={20} fill="#D35400" strokeWidth={1.5} />
               </div>
               <div className={styles.trustBadgeText}>
                 <span className={styles.trustBadgeScore}>{t('philosophy.trustScore')}</span>

@@ -1,93 +1,679 @@
-.footer {
-  background-color: #1A1A1A; /* Very dark slate */
-  color: #D9D9D9;
-  padding-top: var(--spacing-3xl);
-  border-top: 4px solid var(--color-primary);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-lg);
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--spacing-2xl);
-}
-
-.brand .logo {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-md);
-  display: flex;
-  gap: 0.25rem;
-}
-.logoVedic { color: var(--color-primary); }
-.logoVenues { color: var(--color-secondary); }
-
-.description {
-  line-height: 1.8;
-  max-width: 400px;
-  font-size: 1rem;
-}
-
-.links {
+.footerWrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  width: 100%;
+  position: relative;
 }
 
-.links h3 {
-  color: var(--color-surface);
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
+/* =========================================
+   Top App Download CTA Banner (Light)
+   ========================================= */
+.appBannerSection {
+  background-color: #FFFFFF;
+  padding: 5rem 1.5rem 0;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid #F1F5F9;
+}
+
+.appBannerContainer {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: flex-end;
+  gap: 3rem;
+}
+
+.appContentCol {
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.appTitle {
+  font-family: var(--font-outfit);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.25rem 0;
+}
+
+.appSubtitle {
+  font-family: var(--font-outfit);
+  font-size: 1.05rem;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0 0 2.25rem 0;
+  max-width: 520px;
+}
+
+.storeBadges {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.playstoreButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  background-color: #000000;
+  padding: 0.625rem 1.5rem;
+  text-align: center;
+  color: #FFFFFF;
+  outline: 0;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.playstoreButton:hover {
+  background-color: transparent;
+  color: #000000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.icon {
+  height: 1.7rem;
+  width: 1.7rem;
+  flex-shrink: 0;
+}
+
+.texts {
+  margin-left: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.text1 {
+  margin-bottom: 0.25rem;
+  font-size: 0.65rem;
+  line-height: 1rem;
+  font-family: var(--font-outfit);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.text2 {
+  font-weight: 700;
+  font-size: 1.05rem;
+  font-family: var(--font-outfit);
+  letter-spacing: -0.01em;
+}
+
+/* =========================================
+   Phone Mockup Styling
+   ========================================= */
+.appPhoneCol {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+
+.phoneFrame {
+  width: 320px;
+  height: 380px;
+  background: #181D26;
+  border-radius: 36px 36px 0 0;
+  padding: 10px 10px 0 10px;
+  box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.12), inset 0 2px 4px rgba(255, 255, 255, 0.15);
+  position: relative;
+  border: 4px solid #334155;
+  border-bottom: none;
+}
+
+.phoneDynamicIsland {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 18px;
+  background-color: #000000;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+.phoneScreen {
+  background-color: #F8FAFC;
+  border-radius: 26px 26px 0 0;
+  height: 100%;
+  padding: 12px 14px 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.phoneStatusBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0F172A;
+  padding: 0 4px;
+}
+
+.phoneStatusIcons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.signalBar {
+  width: 14px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.batteryIcon {
+  width: 16px;
+  height: 8px;
+  border: 1.5px solid currentColor;
+  border-radius: 2.5px;
+  position: relative;
+}
+
+.phoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.phoneUserGreet {
+  font-size: 0.75rem;
+  color: #64748B;
+  display: block;
+}
+
+.phoneWelcome {
+  font-family: var(--font-outfit);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.phoneAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFF5EC;
+  border: 1px solid rgba(211, 84, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.phoneAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.phoneCard {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 175px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.phoneCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.phoneCardBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  color: #F8FAFC;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.phoneCardInfo {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  padding: 8px 10px;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneCardTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.phoneCardLocation {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.phoneChips {
+  display: flex;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.phoneChip {
+  font-size: 0.68rem;
   font-weight: 500;
-  margin-bottom: var(--spacing-md);
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #E2E8F0;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.chipActive {
+  background: var(--color-primary, #D35400);
+  color: #FFFFFF;
+}
+
+/* =========================================
+   Bottom Light Footer (Replacing Dark Footer)
+   ========================================= */
+.lightFooter {
+  background-color: #F8FAFC;
+  color: #64748B;
+  padding: 5rem 1.5rem 2.5rem;
+  position: relative;
+  font-family: var(--font-outfit);
+}
+
+.footerContainerLight {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1.6fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+
+/* Brand Column */
+.footerBrandCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLogo {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  text-decoration: none;
+}
+
+.footerLogoImg {
+  height: 62px;
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+  display: block;
+}
+
+.footerDescription {
+  font-size: 0.95rem;
+  color: #64748B;
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0;
+}
+
+/* Vendor Register Button from UIverse */
+.vendorBtnWrapper {
+  margin-top: 1.5rem;
+}
+
+.vendorBtn {
   position: relative;
   display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  width: 14rem;
+  height: auto;
 }
 
-.links h3::after {
-  content: '';
+.vendorBtnCircle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #000000;
+  border-radius: 1.625rem;
+}
+
+.vendorBtnIcon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
   position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+
+.vendorBtnArrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+
+.vendorBtnArrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+
+.vendorBtnText {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
   left: 0;
-  bottom: -4px;
-  height: 1px;
-  width: 40px;
-  background-color: var(--color-primary);
-}
-
-.links a, .address {
-  color: #B3B3B3;
-  font-size: 0.95rem;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #000000;
+  font-weight: 700;
   line-height: 1.6;
-}
-
-.links a:hover {
-  color: var(--color-secondary-light);
-}
-
-.bottom {
   text-align: center;
-  padding: var(--spacing-xl) 0;
-  margin-top: var(--spacing-3xl);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.875rem;
-  color: #8C8C8C;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  white-space: nowrap;
 }
 
-@media (max-width: 900px) {
-  .container {
-    grid-template-columns: 1fr 1fr;
+.vendorBtn:hover .vendorBtnCircle {
+  width: 100%;
+}
+
+.vendorBtn:hover .vendorBtnArrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+
+.vendorBtn:hover .vendorBtnText {
+  color: #fff;
+}
+
+/* Links Columns */
+.footerLinksCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLinkTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1E293B;
+  margin: 0 0 1.5rem 0;
+}
+
+.footerNavListLight {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.footerNavListLight li a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748B;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footerNavListLight li a:hover {
+  color: #0F172A;
+}
+
+.externalLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.linkIcon {
+  color: #94A3B8;
+  transition: color 0.2s ease;
+}
+
+.externalLink:hover .linkIcon {
+  color: #0F172A;
+}
+
+/* Newsletter Column */
+.footerNewsletterCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsletterDescLight {
+  font-size: 0.9rem;
+  color: #64748B;
+  line-height: 1.55;
+  margin: 0 0 1.25rem 0;
+  max-width: 320px;
+}
+
+.newsletterFormLight {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 9999px;
+  padding: 5px;
+  margin-bottom: 1rem;
+  max-width: 350px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+  border: 1px solid #E2E8F0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletterFormLight:focus-within {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.newsletterAt {
+  color: #94A3B8;
+  font-size: 1rem;
+  font-weight: 500;
+  padding-left: 1rem;
+}
+
+.newsletterInputLight {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #334155;
+  padding: 0.65rem 0.6rem;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.newsletterInputLight::placeholder {
+  color: #94A3B8;
+}
+
+.newsletterBtnLight {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.newsletterBtnLight:hover {
+  background-color: #1E293B;
+  transform: scale(1.05);
+}
+
+.subscribedMsg {
+  color: #10B981;
+  font-size: 0.85rem;
+  margin-top: -0.25rem;
+}
+
+/* Bottom Copyright */
+.footerBottomLight {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerBottomLeft {
+  display: flex;
+  align-items: center;
+}
+
+.copyrightTextLight {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #64748B;
+  margin: 0;
+}
+
+.footerBottomRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.builtText {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+.bottomSocials {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bottomSocialIcon {
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.bottomSocialIcon:hover {
+  color: #0F172A;
+}
+
+/* =========================================
+   Responsive Breakpoints
+   ========================================= */
+@media (max-width: 960px) {
+  .appBannerContainer {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
   }
-  .brand {
+
+  .appContentCol {
+    padding-bottom: 1rem;
+    align-items: center;
+  }
+
+  .appSubtitle {
+    margin-inline: auto;
+  }
+
+  .storeBadges {
+    justify-content: center;
+  }
+
+  .footerContainerLight {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footerBrandCol, .footerNewsletterCol {
     grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 600px) {
-  .container {
+  .appBannerSection {
+    padding: 3.5rem 1rem 0;
+  }
+
+  .phoneFrame {
+    width: 270px;
+    height: 330px;
+  }
+
+  .footerContainerLight {
     grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
+    gap: 2rem;
+  }
+
+  .footerBottomLight {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
   }
 }

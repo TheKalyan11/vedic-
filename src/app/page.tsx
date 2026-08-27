@@ -6,6 +6,8 @@ import { VenuesByCity } from '../components/home/VenuesByCity';
 import { PopularVendors } from '../components/home/PopularVendors';
 import { WeddingCategories } from '../components/home/WeddingCategories';
 import { PhilosophySection } from '../components/home/PhilosophySection';
+import { GallerySection } from '../components/home/GallerySection';
+import { FaqSection } from '../components/home/FaqSection';
 import styles from './page.module.css';
 
 export default async function Home() {
@@ -34,6 +36,12 @@ export default async function Home() {
 
       {/* Philosophy / Value Proposition Showcase */}
       <PhilosophySection />
+
+      {/* FAQs Section */}
+      <FaqSection />
+
+      {/* 3D Gallery Section */}
+      <GallerySection />
     </div>
   );
 }

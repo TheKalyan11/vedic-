@@ -1,6 +1,6 @@
 .citySection {
-  padding: 2.75rem 0 4rem 0;
-  background-color: #FFFFFF;
+  padding: 3rem 0;
+  background-color: var(--color-background);
 }
 
 .container {
@@ -209,7 +209,7 @@
 
 @media (max-width: 768px) {
   .citySection {
-    padding: 2rem 0 3rem 0;
+    padding: 0;
   }
 
   .header {

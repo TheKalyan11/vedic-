@@ -753,16 +753,18 @@
   padding: 24px 32px;
   z-index: 2000;
   animation: unifiedDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: auto;
 }
 
 /* Invisible hover bridge to prevent premature closing */
 .unifiedMegaDropdown::before {
   content: '';
   position: absolute;
-  top: -16px;
+  top: -24px;
   left: 0;
   right: 0;
-  height: 16px;
+  height: 24px;
+  pointer-events: auto;
 }
 
 .unifiedMegaInner {

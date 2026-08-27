@@ -1,41 +1,86 @@
-.floatingButton {
+.floatingWrapper {
   position: fixed;
-  bottom: var(--spacing-xl);
-  right: var(--spacing-xl);
-  width: 60px;
-  height: 60px;
-  background-color: #25D366; /* Official WhatsApp Color */
-  color: white;
-  border-radius: var(--radius-full);
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 1000;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 215, 87, 0.35);
+  background-color: #00d757;
+  text-decoration: none;
+}
+
+.sign {
+  width: 100%;
+  transition-duration: 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-lg);
-  z-index: 1000;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  cursor: pointer;
+  flex-shrink: 0;
 }
 
-.floatingButton:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 16px 40px rgba(37, 211, 102, 0.3);
+.sign svg {
+  width: 25px;
+  height: 25px;
 }
 
-.icon {
-  width: 35px;
-  height: 35px;
+.sign svg path {
+  fill: white;
+}
+
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: var(--font-outfit, sans-serif);
+  transition-duration: 0.3s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.btn:hover {
+  width: 148px;
+  border-radius: 40px;
+  transition-duration: 0.3s;
+  box-shadow: 0 6px 20px rgba(0, 215, 87, 0.45);
+}
+
+.btn:hover .sign {
+  width: 32%;
+  transition-duration: 0.3s;
+  padding-left: 10px;
+}
+
+.btn:hover .text {
+  opacity: 1;
+  width: 68%;
+  transition-duration: 0.3s;
+  padding-right: 12px;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
 }
 
 @media (max-width: 768px) {
-  .floatingButton {
-    bottom: var(--spacing-lg);
-    right: var(--spacing-lg);
-    width: 50px;
-    height: 50px;
-  }
-  
-  .icon {
-    width: 30px;
-    height: 30px;
+  .floatingWrapper {
+    bottom: 1.25rem;
+    left: 1.25rem;
   }
 }

@@ -1,6 +1,6 @@
 .philosophySection {
-  padding: 5rem 0 6rem 0;
-  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 50%, #F5F1EB 100%);
+  padding: 3rem 0;
+  background-color: #FFFFFF;
   position: relative;
   overflow: hidden;
 }
@@ -301,7 +301,7 @@
 
 @media (max-width: 640px) {
   .philosophySection {
-    padding: 3.5rem 0 4.5rem 0;
+    padding: 0;
   }
 
   .title {

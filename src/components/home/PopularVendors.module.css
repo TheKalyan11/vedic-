@@ -1,6 +1,7 @@
 .vendorsSection {
-  padding: 3.5rem 0 4.5rem 0;
-  background-color: #F8FAFC;
+  padding: 3rem 0;
+  background-color: var(--color-background);
+  position: relative;
 }
 
 .container {
@@ -305,7 +306,7 @@
 
 @media (max-width: 640px) {
   .vendorsSection {
-    padding: 2.5rem 0 3.5rem 0;
+    padding: 0;
   }
 
   .header {
