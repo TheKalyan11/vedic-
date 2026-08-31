@@ -690,6 +690,7 @@
     overflow: hidden;
     max-height: 0;
     opacity: 0;
+    pointer-events: auto;
     transition: all var(--transition-normal);
   }
 
@@ -847,8 +848,8 @@
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   padding: 24px 32px;
   z-index: 2000;
-  animation: unifiedDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   pointer-events: auto;
+  animation: unifiedDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Invisible hover bridge to prevent premature closing */
