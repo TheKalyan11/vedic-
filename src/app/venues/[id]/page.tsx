@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import styles from './page.module.css';
 
-export default async function VenueDetailsPage({ params }: { params: { id: string } }) {
+export default async function VenueDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const venue = await venueService.getVenueById(id);
 
